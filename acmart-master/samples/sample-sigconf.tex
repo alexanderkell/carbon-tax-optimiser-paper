@@ -70,6 +70,7 @@
 %%
 %% end of the preamble, start of the body of the document source.
 \begin{document}
+\emergencystretch 3em
 
 %%
 %% The "title" command has an optional parameter,
@@ -135,7 +136,7 @@
 %%
 %% Keywords. The author(s) should pick words that accurately describe
 %% the work being presented. Separate the keywords with commas.
-\keywords{Energy markets, policy, carbon tax, genetic algorithm, optimization}
+\keywords{Energy markets, policy, carbon tax, genetic algorithm, optimization, digital twin, agent-based models, electricity market model}
 
 %% A "teaser" image appears between the author and affiliation
 %% information and the body of the document, and typically spans the
@@ -156,7 +157,15 @@ Computer simulation allows practitioners to model real-world systems using softw
 
 % Electricity markets
 
-Electricity markets are an example of such a system. Disruptions to electricity supply, a substantial increase in the cost of electricity or unrestrained carbon emissions have the potential to destabilise economies. It is for reasons such as these that electricity market models are used to test hypotheses, develop strategies and gain an understanding of underlying dynamics \cite{Jebaraj2006}. 
+Electricity markets are an example of such a system. Disruptions to electricity supply, a substantial increase in the cost of electricity or unrestrained carbon emissions have the potential to destabilise economies. It is for reasons such as these that electricity market models are used to test hypotheses, develop strategies and gain an understanding of underlying dynamics to prevent undesirable consequences \cite{Jebaraj2006}. 
+
+In this paper we use the electricity market agent-based model ElecSim to find an optimum carbon tax strategy \cite{Kell}. Specifically, we use a genetic algorithm to find a carbon tax policy to reduce both average electricity price and the relative carbon density by 2035 for the UK electricity market. 
+
+For this, we use the reference scenario projected by the UK Government's Department for Business \& Industrial Strategy (BEIS) and used model parameters calibrated by Kell \textit{et al.} \cite{DBEIS2019,Kell2020}. This reference scenario projects energy and emissions until 2035. 
+
+In contrast to grid or random search, genetic algorithms have the ability to converge on an optimal solution by trialling a fewer number of parameters. This is of particular importance in cases with a large number of parameters or long compute time of the function to optimise.
+
+
 
 
 % Digital twin
