@@ -230,11 +230,11 @@ Multi-objective optimisation allows practitioners to overcome the problems with 
 
 The NSGA-II algorithm, a multi-objective genetic optimisation algorithm, is able to generate a Pareto frontier in a single optimisation run. 
 
-In this section we will first detail the vanilla genetic algorithm, followed by a look at NSGA-II.
+In this section we will first detail the standard genetic algorithm, followed by a look at NSGA-II.
 
 \subsection{Genetic Algorithms}
 
-Genetic Algorithms ~\cite{Holland1975} are a class of evolutionary algorithm which can be used for optimisation. In this section we detail the generic version of a genetic algorithm.
+Genetic Algorithms (GAs) ~\cite{Holland1975} are a class of evolutionary algorithm which can be used for optimisation. In this section we detail the generic version of a genetic algorithm.
 
 Initially, a population of structures $P_{0}$ is generated. $P_{0}$ is then evaluated for fitness. Where fitness in this case is the reward that is to be optimised. Next, a subset of individuals from $P_{0}$ are chosen for mating, $C_{t+1} \subset P_{t}$. This subset of individuals are selected proportional to their fitness. For mating with the subset $C_{t+1}$, the `fitter' individuals have a higher chance of reproducing to create the offspring group $C'_{t+1}$. The individuals of $C'_{t+1}$ have characteristics dependent on the genetic operators, crossover and mutation. These genetic operators are an implementation decision \cite{FogelDavidB2009}. 
 
@@ -298,26 +298,30 @@ We assume that there are $M$ objective functions to minimise, and that ${\bf x^{
 \end{figure}
 
 
-Once the solutions are calculated for the $M$ objective functions, the solutions are sorted according to their level of non-domination. An example of layering of levels is shown in Figure \ref{fig:pareto-layering}a. Here, $f_1$ and $f_2$ are the objective functions to be minimized. The Pareto front is the first front which contains solutions that are not dominated by any other solution. The solutions in layer 1 are dominated only by those in the Pareto front, and are non-dominated by layer 2 and layer 3. 
+Next, each of the solutions are ranked according to their level of non-domination. An example of this ranking is shown in Figure \ref{fig:pareto-layering}a. Here, $f_1$ and $f_2$ are the objectives to be minimised. The Pareto front is the first front. All of the solutions in the Pareto front are not dominated by any other solution. The solutions in layer 1, L1, are dominated only by those in the Pareto front, and are non-dominated by those in L2 and L3.
 
-The solutions are then ranked according to their layer. Solutions in the Pareto front are given a fitness rank ($i_{rank}$) of 1, solutions in layer 1 have $i_{rank}$ of 2, etc.
+The solutions are then ranked according to their layer. For example, the solutions in the Pareto front are given a fitness rank ($i_{rank}$) of 1, solutions in L1 have an $i_{rank}$ of 2, etc.
 
 \subsubsection{Density Estimation}
-($i_{distance}$) is computed for each solution as the average distance between the two closest points to the solution in question, and is an estimate of the largest cuboid which contains only $i$ and no other points. 
+($i_{distance}$) is calculated for each solution. This is the average distance between the two closest points to the solution in question. 
+
 
 \subsubsection{Crowded comparison operator}
-($\prec_n$) is used to ensure that the final frontier is an evenly spread out Pareto-optimal front. Each solution has two attributes: $(i_{rank})$ and$(i_{distance})$. 
+($\prec_n$) is used to ensure that the final frontier is an evenly spread out Pareto-optimal front. This is achieved by using the two attributes: $(i_{rank})$ and$(i_{distance})$. 
 %\begin{enumerate}
 %  \item Non-domination rank $(i_{rank})$
 %  \item Local crowding distance $(i_{distance})$
 %\end{enumerate}
-We can then define a partial order:\\	
+The partial order is then defined as:\\	
 $i\prec_nj$ if $(i_{rank}<j_{rank})$ or $((i_{rank}=j_{rank})$ and  $(i_{distance}>j_{distance}))$ \cite{Valkanas2014}.
 
-This concludes that a point with a lower rank is preferred, and if two points have the same rank the point which is located in a less dense area is preferred.
+This order prefers solutions with a lower rank $i_{rank}$. For solutions with the same rank, the solution in the less dense area is preferred.
 
 \subsubsection{Main loop}
-As with standard GA a random population $P_{0}$ is created. This is then  sorted according to non-domination. Binary tournament selection, recombination and mutation operators are used to create a child population $C'_{1}$ of size $N$. Where tournament selection is a process of evaluating and comparing the fitness of various individuals in a population. Binary tournament selection begins by selecting two individuals at random, evaluating the fitnesses, and selecting the individual with the better solution \cite{AbdRahman2016}.
+
+Similarly to the standard GA, a population $P_{0}$ is created with random parameters. The solutions of $P_0$ are then sorted according to non-domination. The child population $C'_{1}$ of size $N$ is then created by binary tournament selection, recombination and mutation operators. In this case, tournament selection is the process of evaluating and comparing the fitnesses of various individuals within a population. In binary tournament selection, two individuals are chosen at random, the fitnesses are evaluated and the individual with the better solution is selected~\cite{AbdRahman2016}. 
+
+
 
 \begin{algorithm}[b]
 \begin{algorithmic}[1]
@@ -342,9 +346,12 @@ the new population $Q_{t+1}$
 \label{algo:nsga2}
 \end{algorithmic}
 \end{algorithm}
-After the first population the procedure changes (see Algorithm \ref{algo:nsga2}). Initially, a combined population is formed $R_{t}=P_{t} \cup C'_{t}$ of size $2N$. $R_{t}$ is sorted according to non-domination. A new population is now formed $(P_{t+1})$, adding solutions from each front level until the size of $P_{t+1}$ exceeds $N$. The solutions of the last accepted level are then sorted according to $\prec_n$, and a total of $N$ solutions are chosen, rejecting those from the last layer that have a smaller crowding distance \cite{Valkanas2014}.
 
-The entire process is shown in Figure \ref{fig:pareto-layering}b, and is repeated until the termination condition is met. Termination conditions could be: no significant improvement over $X$ iterations or a specified number of iterations have been performed.
+
+Next, a new combined population is formed $R_{t}=P_{t} \cup C'_{t}$. $R_t$ has a size of $2N$. $R_t$ is then sorted according to non-domination. A new population is then formed $P_{t+1}$. Solutions are added from the sorted $R_t$ in order of non-domination. Solutions are added until the size of $P_{t+1}$ exceeds $N$. The solutions from the last layer are prioritised based on having the largest crowding distance~\cite{Valkanas2014}.
+
+This process is shown in Figure \ref{fig:pareto-layering}b, which is repeated until the termination condition is met. A termination condition could be:  no significant improvement over $X$ iterations or a specified number of iterations have been performed. 
+
 
 
 \section{Simulation Environment}
