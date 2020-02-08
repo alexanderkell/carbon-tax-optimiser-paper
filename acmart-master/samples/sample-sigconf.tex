@@ -23,6 +23,10 @@
 %%
 %% The first command in your LaTeX source must be the \documentclass command.
 \documentclass[sigconf]{acmart}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
 
 %%
 %% \BibTeX command to typeset BibTeX logo in the docs
@@ -75,7 +79,7 @@
 %%
 %% The "title" command has an optional parameter,
 %% allowing the author to define a "short title" to be used in page headers.
-\title{Optimizing carbon tax for decentralized electricity markets with an agent-based model}
+\title{Optimizing carbon tax for decentralized electricity markets using an agent-based model}
 
 %%
 %% The "author" command and its associated commands are used to define
@@ -153,7 +157,7 @@
 
 % Computer simulation - why it is required
 
-Computer simulation allows practitioners to model real-world systems using software. These simulations allow for `\textit{what-if}' analyses which can provide an indication as to how a system may behave under certain policies, environments and assumptions. These simulations become important in systems which have high costs, impacts or risks associated with them.
+Computer simulation allows practitioners to model real-world systems using software. These simulations allow for `\textit{what-if}' analyses which can provide an indication as to how a system may behave under certain policies, environments and assumptions. These simulations become particularly important in systems which have high costs, impacts or risks associated with them.
 
 % Electricity markets
 
@@ -161,10 +165,20 @@ Electricity markets are an example of such a system. Disruptions to electricity 
 
 In this paper we use the electricity market agent-based model ElecSim to find an optimum carbon tax strategy \cite{Kell}. Specifically, we use a genetic algorithm to find a carbon tax policy to reduce both average electricity price and the relative carbon density by 2035 for the UK electricity market. 
 
-For this, we use the reference scenario projected by the UK Government's Department for Business \& Industrial Strategy (BEIS) and used model parameters calibrated by Kell \textit{et al.} \cite{DBEIS2019,Kell2020}. This reference scenario projects energy and emissions until 2035. 
+Carbon taxes have been shown to lower emissions quickly with lower costs to the public, with no upper bounds in terms of the reduction potential \cite{Wittneben2009}. Carbon taxes are able to send clear price signals, as opposed to a cap-and-trade scheme, such as the EU Emissions Trading System, which has shown to be unstable.
 
-In contrast to grid or random search, genetic algorithms have the ability to converge on an optimal solution by trialling a fewer number of parameters. This is of particular importance in cases with a large number of parameters or long compute time of the function to optimise.
+In this paper we use the reference scenario projected by the UK Government's Department for Business \& Industrial Strategy (BEIS) and used the model parameters calibrated by Kell \textit{et al.} \cite{DBEIS2019,Kell2020}. This reference scenario projects energy and emissions until 2035. We undertook various carbon tax policy interventions to see how we could reduce relative carbon density whilst at the same time reduce the average electricity price.
 
+
+In contrast to grid or random search, genetic algorithms have the ability to converge on an optimal solution by trialling a fewer number of parameters \cite{Bergstra2012}. Grid search is the trialling of parameters at evenly distributed spaces and random search is where parameters are chosen at random. This is of particular importance in cases with a large number of parameters or in simulations which require a long compute time which is the case for ElecSim.
+
+In order to optimise over these two potentially competing objectives, we used a Genetic Algorithm, the Non-Dominated Sorting Genetic Algorithm II (NSGA-II) \cite{Valkanas2014}. The NSGA-II algorithm can approximate a Pareto frontier ~\cite{Pareto1927, Stadler1979}. A Pareto frontier is a curve in which there is no solution which is better than another along the curve for different sets of parameters.
+
+We find that the rewards of average electricity price and relative carbon intensity are not mutually exclusive. That is, it is possible to have both a lower average electricity price and a lower relative carbon price. This is due to the low short-run marginal cost of renewable technology, which has been shown to lower electricity prices \cite{OMahoney2011}.
+
+The main contribution of this paper is to explore carbon tax strategies using genetic algorithms for multi-objective optimisation. We optimise both average electricity price and relative carbon intensity of the electricity market over a 17 year timeframe.
+
+{\color{red} The rest of this paper is set out as follows. Section \ref{sec:lit_review}, Section \ref{sec:optimization_methods}, Section \ref{sec:sim_environment}, Section \ref{sec:results}, and Section \ref{sec:conclusion}}.
 
 
 
@@ -184,23 +198,157 @@ In contrast to grid or random search, genetic algorithms have the ability to con
 
 
 \section{Literature Review}
+\label{sec:lit_review}
 
-Placeholder
+Multi-objective optimisation problems are commonplace. In this section we review multiple applications that have used multi-objective optimisation, as well as explore the literature which focus on finding optimal carbon tax strategies.
+
+\subsection{Examples of Optimization}
 % Optimisation literature
 
-% Carbon optimisation related literature
+Ascione  \textit{et al}. use the NSGA-II algorithm to generate a Pareto front to optimise operating cost for space conditioning and thermal comfort \cite{Ascione2016}. They aim to optimise the hourly set point temperatures with a day-ahead planning horizon. They generate a Pareto front which allows a user to select a solution according to their comfort needs and economic constraints. They are able to reduce operating costs by up to 56\% as well as improve thermal comfort.
+
+Gorza\l{}czany \textit{et al}. apply the NSGA-II algorithm to the credit classification problem \cite{Gorzaczany2016}. They optimise over accuracy and interpretability when making financial decisions such as credit scoring and bankruptcy prediction. They are able to significantly outperform the alternative methods in terms of interpretability while remaining competitive or superior in terms of the accuracy and speed of decision making.
+
+Ma \textit{et al}. use the multi-objective artificial immune optimization algorithm for land use allocation (MOAIM-LUA model) \cite{Ma2015}. They balance land use supply and demand based on the future dynamic demands from different land use stakeholders in the region at the macro-level in Anlu County, China. They optimise the objectives of economic benefits and ecological benefits. They found that for this application they were able to obtain better solution sets than the NSGA-II algorithm.
+
+
+\subsection{Carbon Tax Strategies}
+% Carbon tax optimisation related literature
+
+
+Zhou \textit{et al.} construct a social welfare model based on a Stackelberg game~\cite{Zhou2019}. They analyse the differences and similarities between a flat carbon tax and an increasing block tariff carbon tax using a numerical simulation. They show that an increasing block tariff carbon tax policy can significantly reduce tax burdens for manufacturers and encourage low-carbon production. In contrast to Zhou \textit{et al}. we trial multiple different carbon tax strategies using a machine learning approach. 
+
+Li \textit{et al}. use a hierarchical carbon market scheduling model to reduce carbon emissions \cite{Li2017}. They use multi-objective optimisation to find optimal behaviours for policy makers, customers and generators to minimise the costs incurred by these actors. Our paper, however, focuses on the different strategies of carbon tax as opposed to optimal actor behaviour.
+
+Levin \textit{et al}. use an optimisation model to analyze market and investment impacts of several incentive mechanisms to support investment in renewable energy and carbon emission reductions~\cite{Levin2019}. They find that a carbon tax is the most cost-efficient method of reducing emissions.
 
 
 \section{Optimization methods}
+\label{sec:optimization_methods}
 
-Placeholder
-% GA \cite{John Holland}
+Multi-objective optimisation allows practitioners to overcome the problems with optimising multiple objectives with classical optimisation techniques. Multi-objective optimisation algorithms are able to generate Pareto-optimal solutions as opposed to converting the multiple objectives into a single-objective problem. A Pareto frontier is made up of many Pareto-optimal solutions which can be displayed graphically. A user is then able to choose between various solutions and trade-offs according to their wishes.
 
-% NSGA II
+The NSGA-II algorithm, a multi-objective genetic optimisation algorithm, is able to generate a Pareto frontier in a single optimisation run. 
+
+In this section we will first detail the vanilla genetic algorithm, followed by a look at NSGA-II.
+
+\subsection{Genetic Algorithms}
+
+Genetic Algorithms ~\cite{Holland1975} are a class of evolutionary algorithm which can be used for optimisation. In this section we detail the generic version of a genetic algorithm.
+
+Initially, a population of structures $P_{0}$ is generated. $P_{0}$ is then evaluated for fitness. Where fitness in this case is the reward that is to be optimised. Next, a subset of individuals from $P_{0}$ are chosen for mating, $C_{t+1} \subset P_{t}$. This subset of individuals are selected proportional to their fitness. For mating with the subset $C_{t+1}$, the `fitter' individuals have a higher chance of reproducing to create the offspring group $C'_{t+1}$. The individuals of $C'_{t+1}$ have characteristics dependent on the genetic operators, crossover and mutation. These genetic operators are an implementation decision \cite{FogelDavidB2009}. 
+
+The new population $P_{t+1}$ is then created by merging individuals from $C'_{t+1}$ and $P_{t}$. See Algorithm \ref{genetic-algorithm} for detailed pseudocode.
+%
+\begin{algorithm}[t]
+\begin{algorithmic}[1]
+\State $t=0$
+\State initialize $P_{t}$
+\State evaluate structures in $P_{t}$
+\While {termination condition not satisfied}
+\State $t=t+1$
+\State select reproduction $C_{t}$ from $P_{t-1}$
+\State recombine and mutate structures in $C_{t}$
+
+forming $C'_{t}$
+\State evaluate structures in $C'_{t}$
+\State select each individual for $P_{t}$ from $C'_{t}$ 
+
+or $P_{t-1}$
+\EndWhile
+\caption{Genetic algorithm \cite{FogelDavidB2009}}
+\label{genetic-algorithm}
+\end{algorithmic}
+\end{algorithm}
+
+%%%%%%
+
+
+\subsection{NSGA-II}
+
+
+NSGA-II is efficient for multi-objective optimization on a number of benchmark problems and finds a better spread of solutions than Pareto Archived Evolution Strategy (PAES)~\cite{Knowles1999} and Strength Pareto EA (SPEA)~\cite{Zitzler2006} when approximating the true Pareto-optimal front \cite{Valkanas2014}.
+
+The majority of multi-objective optimisation algorithms use the concept of \emph{domination} during population selection \cite{Burke2014}. A non-dominated algorithm, however, seeks to achieve the Pareto-optimal solution. This is where no single solution should dominate another. An individual solution $\mathbf{x}^{1}$ is said to dominate another $\mathbf{x}^{2}$, if and only if there is no objective of $\mathbf{x}^{1}$ that is worse than objective of $\mathbf{x}^{2}$ and at least one objective of $\mathbf{x}^{1}$ is better than the same objective of $\mathbf{x}^{2}$ \cite{Bao2017}. 
+
+
+Non-domination sorting is the process of finding a set of solutions which do not dominate each other and make up the Pareto front. See Figure \ref{fig:pareto-layering}a for a visual representation, where $f_1$ and $f_2$ are two objectives to minimise and L1, L2 and L3 are dominated layers.
+
+
+In this section we define the processes used by the NSGA-II algorithm to determine which solutions to keep:
+\subsubsection{Non-dominated sorting}
+%The concept of domination is discussed in this section. 
+We assume that there are $M$ objective functions to minimise, and that ${\bf x^{1}} = x_j^{1}$ and $\bf x^{2}$ are two solutions. $x_j^{1}<x_j^{2}$ implies solution $\bf x^{1}$ is better than solution $\bf x^{2}$ on objective $j$. A solution $\mathbf{x}^{1}$ is said to dominate the solution $\mathbf{x}^{2}$ if the following conditions are true:
+\begin{enumerate}
+  \item The solution $\mathbf{x}^{1}$ is no worse than $\mathbf{x}^{2}$ in every objective. I.e. $x^{1}_j \leq x^{2}_j \;\;  \forall j \in\{1,2,\ldots,M\}$.
+  \item The solution $\mathbf{x}^{1}$ is better than $\mathbf{x}^{2}$ in at least one objective. I.e. $\exists\  {j}\in \{ 1,2,\ldots,M\} \;\; s.t. \;\;x^{1}_j < x^{2}_j$.
+\end{enumerate}
+
+
+
+\begin{figure}[t] 
+  \vskip -10pt
+  \center
+  \includegraphics[width=0.2\textwidth]{figures/carbon_optimiser/paretofrontier/paretofrontier}
+  \includegraphics[width=0.270\textwidth]{figures/carbon_optimiser/algsketch/sketch2}
+  \vskip -8pt
+  \caption{a) Schematic of non-dominated sorting with solution layering b) Schematic of the NSGA-II procedure}
+  \label{fig:pareto-layering}
+  \vskip -15pt
+\end{figure}
+
+
+Once the solutions are calculated for the $M$ objective functions, the solutions are sorted according to their level of non-domination. An example of layering of levels is shown in Figure \ref{fig:pareto-layering}a. Here, $f_1$ and $f_2$ are the objective functions to be minimized. The Pareto front is the first front which contains solutions that are not dominated by any other solution. The solutions in layer 1 are dominated only by those in the Pareto front, and are non-dominated by layer 2 and layer 3. 
+
+The solutions are then ranked according to their layer. Solutions in the Pareto front are given a fitness rank ($i_{rank}$) of 1, solutions in layer 1 have $i_{rank}$ of 2, etc.
+
+\subsubsection{Density Estimation}
+($i_{distance}$) is computed for each solution as the average distance between the two closest points to the solution in question, and is an estimate of the largest cuboid which contains only $i$ and no other points. 
+
+\subsubsection{Crowded comparison operator}
+($\prec_n$) is used to ensure that the final frontier is an evenly spread out Pareto-optimal front. Each solution has two attributes: $(i_{rank})$ and$(i_{distance})$. 
+%\begin{enumerate}
+%  \item Non-domination rank $(i_{rank})$
+%  \item Local crowding distance $(i_{distance})$
+%\end{enumerate}
+We can then define a partial order:\\	
+$i\prec_nj$ if $(i_{rank}<j_{rank})$ or $((i_{rank}=j_{rank})$ and  $(i_{distance}>j_{distance}))$ \cite{Valkanas2014}.
+
+This concludes that a point with a lower rank is preferred, and if two points have the same rank the point which is located in a less dense area is preferred.
+
+\subsubsection{Main loop}
+As with standard GA a random population $P_{0}$ is created. This is then  sorted according to non-domination. Binary tournament selection, recombination and mutation operators are used to create a child population $C'_{1}$ of size $N$. Where tournament selection is a process of evaluating and comparing the fitness of various individuals in a population. Binary tournament selection begins by selecting two individuals at random, evaluating the fitnesses, and selecting the individual with the better solution \cite{AbdRahman2016}.
+
+\begin{algorithm}[b]
+\begin{algorithmic}[1]
+\State $R_t=P_t \cup C'_t$ combine parent and child population
+\State $\mathcal{F} = $ fast-non-dominated-sort $(R_t)$ 
+
+where $\mathcal{F}=(\mathcal{F}_1, \mathcal{F}_2,\ldots)$
+\State $P_{t+1}=\emptyset$
+\While $\left|P_{t+1}<N\right|$
+\State Calculate the crowding distance of $(\mathcal{F}_i)$)
+\State $P_{t+1}=P_{t+1}\cup \mathcal{F}_i$
+\EndWhile
+\State Sort($P_{t+1}, \prec_n$) sort in descending order using $\prec_n$
+\State $P_{t+1} = P_{t+1}[0:N]$ select the first $N$ elements of $P_{t+1}$
+\State $Q_{t+1} = $ make-new-population$(P_{t+1})$ using 
+
+selection, crossover and mutation to create 
+
+the new population $Q_{t+1}$
+\State $t=t+1$
+\caption{NSGA-II main loop \cite{Valkanas2014}}
+\label{algo:nsga2}
+\end{algorithmic}
+\end{algorithm}
+After the first population the procedure changes (see Algorithm \ref{algo:nsga2}). Initially, a combined population is formed $R_{t}=P_{t} \cup C'_{t}$ of size $2N$. $R_{t}$ is sorted according to non-domination. A new population is now formed $(P_{t+1})$, adding solutions from each front level until the size of $P_{t+1}$ exceeds $N$. The solutions of the last accepted level are then sorted according to $\prec_n$, and a total of $N$ solutions are chosen, rejecting those from the last layer that have a smaller crowding distance \cite{Valkanas2014}.
+
+The entire process is shown in Figure \ref{fig:pareto-layering}b, and is repeated until the termination condition is met. Termination conditions could be: no significant improvement over $X$ iterations or a specified number of iterations have been performed.
 
 
 \section{Simulation Environment}
-
+\label{sec:sim_environment}
 Placeholder
 % ElecSim
 
@@ -208,7 +356,7 @@ Placeholder
 
 
 \section{results}
-Placeholder
+\label{sec:results}
 
 \begin{figure}
 \centering
@@ -254,7 +402,7 @@ Placeholder
 
 
 \section{Conclusion}
-
+\label{sec:conclusion}
 Placeholder
 
 %\section{Acknowledgments}
