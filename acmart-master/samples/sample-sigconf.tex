@@ -27,6 +27,10 @@
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
 \usepackage{graphicx}
+%\usepackage[T1]{fontenc}
+
+%\usepackage{amsmath}
+\usepackage{newpxtext,newpxmath}
 
 %%
 %% \BibTeX command to typeset BibTeX logo in the docs
@@ -354,18 +358,71 @@ This process is shown in Figure \ref{fig:pareto-layering}b, which is repeated un
 
 
 
-\section{Simulation Environment}
+\section{Experimental Setup}
 \label{sec:sim_environment}
 
-In order to evaluate the different carbon strategies we used the model developed by Kell \textit{et al}., ElecSim \cite{Kell,Kell2020}.
 
-% ElecSim
+\subsection{Simulation Environmental}
+In order to evaluate the different carbon strategies we used the model developed by Kell \textit{et al}., ElecSim \cite{Kell,Kell2020}. ElecSim is an agent-based model which mimics the behaviour of decentralised electricity markets. For this paper, we have parametrised the model to data for the UK in 2018. This includes the power plants in operation in 2018, and the funds available to their respective companies \cite{dukes_511, companies_house}.
 
-% Parameters for Carbon Tax
+Five fundamental sections make up ElecSim: 1) power plant data; 2) scenario data; 3) the time-steps of the algorithm; 4) the power exchange; 5) the investment algorithm and 6) the generation companies (GenCos) as agents. ElecSim uses a subset of representative days of electricity demand, solar irradiance and wind speed to approximate a full year. In this context, representative days are a subset of days which when scaled up can adequately represent a year. 
 
+Figure \ref{fig:model_details} details how these parts interact.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.49\textwidth]{/Users/b1017579/Documents/PhD/Projects/10-ELECSIM/run/carbon_tax_optimiser/figures/simulation_details/System_overview_large.png}
+\caption{System overview of ElecSim.}
+\label{fig:model_details}
+\end{figure}
+
+The market runs in merit-order dispatch and bids are made by the power plant's short-run marginal cost (SRMC). Investment in power plants are based upon a net present value (NPV) calculation. NPV is able to evaluate and compare investments with cash flows spread over many years. This is shown formally in Equation \ref{eq:npv_eq}, where $t$ is the year of the cash flow, $i$ is the discount rate, $N$ is the total number of years, or lifetime of power plant, and $R_t$ is the net cash flow of the year $t$:
+
+\begin{equation} \label{eq:npv_eq}
+NPV(i, N) = \sum_{t=0}^{N}\frac{R_t}{(1+t)^t}.
+\end{equation}
+
+The yearly income for each power plant is estimated for each generation company by running a merit-order dispatch electricity market 10 years into the future. However, the expected cost of electricity 10 years into the future is uncertain. We therefore use the reference scenario projected by BEIS and use the predicted costs of electricity calibrated by Kell \textit{et al} \cite{DBEIS2019, Kell2020}.
+
+
+
+\subsection{Optimization}
+\label{ssec:optimization}
+\subsubsection{Non-parametric carbon strategy}
+\label{sssec:non_parametric_strategy}
+The optimization approach took two stages. Firstly, we initialized the population of the NSGA-II algorithm $P_0$ with 18 attributes. These corresponded to a separate carbon tax for each year, shown by Equation \ref{eq:eighteen_degrees_freedom}:
+
+\begin{equation}
+\label{eq:eighteen_degrees_freedom}
+	P_0=\{a_1,a_2,\ldots,a_{18}\}\\
+\end{equation} 
+\begin{equation*}
+		\pounds 0\leq a_y\leq \pounds 250
+\end{equation*}
+
+\noindent where $P_0$ is the first population, $a_y$ is the attribute or carbon price in year $y$ and $a_1$ is the carbon price in year 1, $a_2$ the carbon price in year 2 and so forth. Each of the carbon prices were bound between the values of $\pounds0$ and  $\pounds250$ . This provided the optimization algorithm with the highest degree of freedom. This high degree of freedom enabled a high number of strategies to be trialled due its non-parametric nature. This, however, came with a large search space requiring a large number of iterations.
+
+
+ \subsubsection{Linear carbon strategy}
+ \label{sssec:linear_carbon_strategy}
+ To reduce the search space for the carbon strategy, we trialled a linear carbon strategy, of the form:
+ \begin{equation}
+ 	p_c=a_1y_t+a_2
+ \end{equation}
+ \begin{equation*}
+ 	-14 \leq a_1\leq 14
+ \end{equation*}
+  \begin{equation*}
+ 	0 \leq a_2\leq 250
+ \end{equation*}
+ 
+ \noindent where $p_c$ is the carbon price, $y_t$ is the year, $m$ is the gradient or first attribute and $c$ is the intercept or second attribute. $a_1$ was bound by $-14$ and $14$, and $a_2$ by 0 and 250. These bounds were chosen to ensure that the carbon price did not exceed ${\sim}\pounds 500$ in the year 18 (2035) and was greater than ${\sim}-\pounds250$, as well as ensuring that the carbon tax in the first year was greater than 0 but smaller than 250.
 
 \section{results}
 \label{sec:results}
+
+
+
 
 \begin{figure}
 \centering
