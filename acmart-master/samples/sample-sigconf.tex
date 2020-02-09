@@ -27,10 +27,7 @@
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
 \usepackage{graphicx}
-%\usepackage[T1]{fontenc}
 
-%\usepackage{amsmath}
-\usepackage{newpxtext,newpxmath}
 
 %%
 %% \BibTeX command to typeset BibTeX logo in the docs
@@ -397,10 +394,10 @@ The optimization approach took two stages. Firstly, we initialized the populatio
 	P_0=\{a_1,a_2,\ldots,a_{18}\}\\
 \end{equation} 
 \begin{equation*}
-		\pounds 0\leq a_y\leq \pounds 250
+		 0\leq a_y\leq 250
 \end{equation*}
 
-\noindent where $P_0$ is the first population, $a_y$ is the attribute or carbon price in year $y$ and $a_1$ is the carbon price in year 1, $a_2$ the carbon price in year 2 and so forth. Each of the carbon prices were bound between the values of $\pounds0$ and  $\pounds250$ . This provided the optimization algorithm with the highest degree of freedom. This high degree of freedom enabled a high number of strategies to be trialled due its non-parametric nature. This, however, came with a large search space requiring a large number of iterations.
+\noindent where $P_0$ is the first population, $a_y$ is the attribute or carbon price in year $y$ and $a_1$ is the carbon price in year 1, $a_2$ the carbon price in year 2 and so forth. Each of the carbon prices were bound between the values of \textsterling$0$ and  \textsterling$250$ . This provided the optimization algorithm with the highest degree of freedom. This high degree of freedom enabled a high number of strategies to be trialled due its non-parametric nature. This, however, came with a large search space requiring a large number of iterations.
 
 
  \subsubsection{Linear carbon strategy}
@@ -416,7 +413,7 @@ The optimization approach took two stages. Firstly, we initialized the populatio
  	0 \leq a_2\leq 250
  \end{equation*}
  
- \noindent where $p_c$ is the carbon price, $y_t$ is the year, $m$ is the gradient or first attribute and $c$ is the intercept or second attribute. $a_1$ was bound by $-14$ and $14$, and $a_2$ by 0 and 250. These bounds were chosen to ensure that the carbon price did not exceed ${\sim}\pounds 500$ in the year 18 (2035) and was greater than ${\sim}-\pounds250$, as well as ensuring that the carbon tax in the first year was greater than 0 but smaller than 250.
+ \noindent where $p_c$ is the carbon price, $y_t$ is the year, $m$ is the gradient or first attribute and $c$ is the intercept or second attribute. $a_1$ was bound by $-14$ and $14$, and $a_2$ by 0 and 250. These bounds were chosen to ensure that the carbon price did not exceed ${\sim}$\textsterling500 in the year 18 (2035) and was greater than ${\sim}$-\textsterling250, as well as ensuring that the carbon tax in the first year was greater than \textsterling0 but smaller than \textsterling250.
 
 \section{results}
 \label{sec:results}
