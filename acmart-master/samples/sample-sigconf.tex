@@ -423,7 +423,7 @@ In this section we explore the results of the optimisations, the optimum carbon 
 \subsection{Non-parametric carbon policy}
 \label{sssec:result_non_parametric_strategy}
 
-Figure \ref{fig:free_points_ga_development} shows the development of the genetic algorithm against the rewards. Darker colours display higher generation numbers. The first generation shows a wide spread in relative carbon density and average electricity price. However, over successive generations the solutions converge to a relative carbon density of 0 and a low average electricity price. 
+Figure \ref{fig:free_points_ga_development} shows the development of the genetic algorithm against the rewards, relative carbon density and average electricity price. Darker colours display higher generation numbers. The first generation shows a wide spread in relative carbon density and average electricity price. However, over successive generations the solutions converge to a relative carbon density of 0 and a low average electricity price. 
 
 Strikingly, the rewards of relative carbon density and average electricity price are not mutually destructive. This could be due to the low short-run marginal cost of renewable energy which lowers electricity prices, as well as carbon emissions.
 
@@ -451,7 +451,9 @@ Figure \ref{fig:heatmap_of_free_points} shows a general trend, where carbon tax 
 \subsection{Linear carbon policy}
 \label{sssec:result_linear_carbon_strategy}
 
-Figure \ref{linear_ga_development}
+Figure \ref{fig:linear_ga_development} displays the development of the genetic algorothm against the rewards, relative carbon density and average electricity price. Similarly to the non-parametric carbon policy shown in Figure \ref{fig:free_points_ga_development}, the first generation shows a wide spread of results. However, the spread is far smaller for the linear carbon policy. This may be due to the fact that the carbon policy is easier to predict by the GenCos, increasing confidence in NPV. However, the linear carbon policy also converges to a relative carbon density of 0, and an average electricity price of ${\sim}<10$.
+
+Figure \ref{fig:comparison_of_distributions} compares the distributions of average electricity price for both techniques.
 
 \begin{figure}
 \centering
