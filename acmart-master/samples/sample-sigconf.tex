@@ -131,20 +131,18 @@
 \begin{abstract}
  
 %Background
-
-Averting the effects of anthropogenic climate change requires a transition from fossil-fuels to low-carbon technology. A primary method of achieving this is to decarbonise the electricity grid to provide energy to other sources such as automotive and heating.
-
 %Aims
-
-In this paper we aim to find optimal carbon tax policies by using a genetic algorithm approach to an electricity market model. To do this we use the NSGA-II genetic algorithm to minimise average electricity price and relative carbon intensity of the electricity mix. 
-
 %Methodology
-
 %Results
-
-We show that it is possible find a range of carbon taxes to suit different preferences, whilst minimising both electricity cost and carbon intensity.
-
 %Conclusions.
+
+
+Averting the effects of anthropogenic climate change requires a transition from fossil-fuels to low-carbon technology. A  method of achieving this is to decarbonise the electricity grid to provide energy to other sources such as automotive and heating. Carbon taxes have been show to be an efficient way to aid in this transition.
+
+
+In this paper we aim to find optimal carbon tax policies by using a genetic algorithm approach with the electricity market model, ElecSim. To achieve this we use the NSGA-II genetic algorithm to minimise average electricity price and relative carbon intensity of the electricity mix. We demonstrate that it is possible find a range of carbon taxes to suit different preferences, whilst minimising both electricity cost and carbon intensity.
+
+
 
  
 \end{abstract}
@@ -181,22 +179,22 @@ Computer simulation allows practitioners to model real-world systems using softw
 
 Electricity markets are an example of such a system. Disruptions to electricity supply, a substantial increase in the cost of electricity or unrestrained carbon emissions have the potential to destabilise economies. It is for reasons such as these that electricity market models are used to test hypotheses, develop strategies and gain an understanding of underlying dynamics to prevent undesirable consequences \cite{Jebaraj2006}. 
 
-In this paper we use the electricity market agent-based model ElecSim to find an optimum carbon tax strategy \cite{Kell}. Specifically, we use a genetic algorithm to find a carbon tax policy to reduce both average electricity price and the relative carbon density by 2035 for the UK electricity market. 
+In this paper we use the electricity market agent-based model ElecSim to find an optimum carbon tax policy \cite{Kell}. Specifically, we use a genetic algorithm to find a carbon tax policy to reduce both average electricity price and the relative carbon density by 2035 for the UK electricity market. 
 
-Carbon taxes have been shown to lower emissions quickly with lower costs to the public, with no upper bounds in terms of the reduction potential \cite{Wittneben2009}. Carbon taxes are able to send clear price signals, as opposed to a cap-and-trade scheme, such as the EU Emissions Trading System, which has shown to be unstable.
+Carbon taxes have been shown to quickly lower emissions and lower the costs to the public, with no upper bounds in terms of the reduction potential \cite{Wittneben2009}. Carbon taxes are able to send clear price signals, as opposed to a cap-and-trade scheme, such as the EU Emissions Trading System, which has shown to be unstable.
 
 In this paper we use the reference scenario projected by the UK Government's Department for Business \& Industrial Strategy (BEIS) and used the model parameters calibrated by Kell \textit{et al.} \cite{DBEIS2019,Kell2020}. This reference scenario projects energy and emissions until 2035. We undertook various carbon tax policy interventions to see how we could reduce relative carbon density whilst at the same time reduce the average electricity price.
 
 
-In contrast to grid or random search, genetic algorithms have the ability to converge on an optimal solution by trialling a fewer number of parameters \cite{Bergstra2012}. Grid search is the trialling of parameters at evenly distributed spaces and random search is where parameters are chosen at random. This is of particular importance in cases with a large number of parameters or in simulations which require a long compute time which is the case for ElecSim.
+In contrast to grid or random search, genetic algorithms have the ability to converge on an optimal solution by trialling a fewer number of parameters \cite{Bergstra2012}. Grid search is the trialling of parameters at evenly distributed spaces and random search is where parameters are chosen at random. This is of particular importance in cases with a large number of parameters or in simulations which require a long compute time, which is the case for ElecSim.
 
 In order to optimise over these two potentially competing objectives, we used a Genetic Algorithm, the Non-Dominated Sorting Genetic Algorithm II (NSGA-II) \cite{Valkanas2014}. The NSGA-II algorithm can approximate a Pareto frontier ~\cite{Pareto1927, Stadler1979}. A Pareto frontier is a curve in which there is no solution which is better than another along the curve for different sets of parameters.
 
 We find that the rewards of average electricity price and relative carbon intensity are not mutually exclusive. That is, it is possible to have both a lower average electricity price and a lower relative carbon price. This is due to the low short-run marginal cost of renewable technology, which has been shown to lower electricity prices \cite{OMahoney2011}.
 
-The main contribution of this paper is to explore carbon tax strategies using genetic algorithms for multi-objective optimisation. We optimise both average electricity price and relative carbon intensity of the electricity market over a 17 year timeframe.
+The main contribution of this paper is to explore carbon tax strategies using genetic algorithms for multi-objective optimisation. We optimise both average electricity price and relative carbon intensity of the electricity market over a 17 year timeframe for the UK.
 
-The rest of this paper is set out as follows. Section \ref{sec:lit_review} covers examples of optimisations using genetic algorithms and different carbon strategies. Section \ref{sec:optimization_methods} details the optimization techniques used. Section \ref{sec:sim_environment} explores the electricity market model. We display our results in Section \ref{sec:results}, and conclude in Section \ref{sec:conclusion}.
+The rest of this paper is set out as follows. Section \ref{sec:lit_review} covers examples of optimisations using genetic algorithms and different carbon strategies. Section \ref{sec:optimization_methods} details the optimization techniques used. Section \ref{sec:sim_environment} explores the electricity market model used. We display our results in Section \ref{sec:results}, and conclude in Section \ref{sec:conclusion}.
 
 
 
@@ -248,7 +246,7 @@ Multi-objective optimisation allows practitioners to overcome the problems with 
 
 The NSGA-II algorithm, a multi-objective genetic optimisation algorithm, is able to generate a Pareto frontier in a single optimisation run. 
 
-In this section we will first detail the standard genetic algorithm, followed by a look at NSGA-II.
+In the next sub-sections we detail the standard genetic algorithm followed by the NSGA-II algorithm.
 
 \subsection{Genetic Algorithms}
 
@@ -376,12 +374,10 @@ This process is shown in Figure \ref{fig:pareto-layering}b, which is repeated un
 \label{sec:sim_environment}
 
 
-\subsection{Simulation Environmental}
+\subsection{Simulation Environment}
 In order to evaluate the different carbon strategies we used the model developed by Kell \textit{et al}., ElecSim \cite{Kell,Kell2020}. ElecSim is an agent-based model which mimics the behaviour of decentralised electricity markets. For this paper, we have parametrised the model to data for the UK in 2018. This includes the power plants in operation in 2018, and the funds available to their respective companies \cite{dukes_511, companies_house}.
 
-Five fundamental sections make up ElecSim: 1) power plant data; 2) scenario data; 3) the time-steps of the algorithm; 4) the power exchange; 5) the investment algorithm and 6) the generation companies (GenCos) as agents. ElecSim uses a subset of representative days of electricity demand, solar irradiance and wind speed to approximate a full year. In this context, representative days are a subset of days which when scaled up can adequately represent a year. 
-
-Figure \ref{fig:model_details} details how these parts interact.
+Six fundamental sections make up ElecSim: 1) power plant data; 2) scenario data; 3) the time-steps of the algorithm; 4) the power exchange; 5) the investment algorithm and 6) the generation companies (GenCos) as agents. ElecSim uses a subset of representative days of electricity demand, solar irradiance and wind speed to approximate a full year. In this context, representative days are a subset of days which when scaled up can adequately represent a year. Figure \ref{fig:model_details} details how these components interact.
 
 \begin{figure}
 \centering
@@ -391,13 +387,10 @@ Figure \ref{fig:model_details} details how these parts interact.
 \end{figure}
 
 The market runs in merit-order dispatch and bids are made by the power plant's short-run marginal cost (SRMC). Investment in power plants are based upon a net present value (NPV) calculation. NPV is able to evaluate and compare investments with cash flows spread over many years. This is shown formally in Equation \ref{eq:npv_eq}, where $t$ is the year of the cash flow, $i$ is the discount rate, $N$ is the total number of years, or lifetime of power plant, and $R_t$ is the net cash flow of the year $t$:
-
 \begin{equation} \label{eq:npv_eq}
 NPV(i, N) = \sum_{t=0}^{N}\frac{R_t}{(1+t)^t}.
 \end{equation}
-
-The yearly income for each power plant is estimated for each generation company by running a merit-order dispatch electricity market 10 years into the future. However, the expected cost of electricity 10 years into the future is uncertain. We therefore use the reference scenario projected by BEIS and use the predicted costs of electricity calibrated by Kell \textit{et al} \cite{DBEIS2019, Kell2020}.
-
+The yearly income for each power plant is estimated for each generation company by running a merit-order dispatch electricity market 10 years into the future. However, the expected cost of electricity 10 years into the future is uncertain. We therefore use the reference scenario projected by BEIS and use the predicted costs of electricity calibrated by Kell \textit{et al} \cite{DBEIS2019, Kell2020}. The agents predict the future carbon price by using a linear regression model.
 
 
 \subsection{Optimization}
@@ -405,7 +398,6 @@ The yearly income for each power plant is estimated for each generation company 
 \subsubsection{Non-parametric carbon policy}
 \label{sssec:non_parametric_strategy}
 The optimization approach took two stages. Firstly, we initialized the population of the NSGA-II algorithm $P_0$ with 18 attributes. These corresponded to a separate carbon tax for each year, shown by Equation \ref{eq:eighteen_degrees_freedom}:
-
 \begin{equation}
 \label{eq:eighteen_degrees_freedom}
 	P_0=\{a_1,a_2,\ldots,a_{18}\}\\
@@ -413,8 +405,7 @@ The optimization approach took two stages. Firstly, we initialized the populatio
 \begin{equation*}
 		 0\leq a_y\leq 250
 \end{equation*}
-
-\noindent where $P_0$ is the first population, $a_y$ is the attribute or carbon price in year $y$ and $a_1$ is the carbon price in year 1, $a_2$ the carbon price in year 2 and so forth. Each of the carbon prices were bound between the values of \textsterling$0$ and  \textsterling$250$ . This provided the optimization algorithm with the highest degree of freedom. This high degree of freedom enabled a high number of strategies to be trialled due its non-parametric nature. This, however, came with a large search space requiring a large number of iterations.
+\noindent where $P_0$ is the first population, $a_y$ is the attribute or carbon price in year $y$ and $a_1$ is the carbon price in year 1, $a_2$ the carbon price in year 2 and so forth. Each of the carbon prices were bound between the values of \textsterling$0$ and  \textsterling$250$. This provided the optimization algorithm with the highest degree of freedom. This high degree of freedom enabled a high number of strategies to be trialled due its non-parametric nature. This, however, came with a large search space requiring a large number of iterations.
 
 
  \subsubsection{Linear carbon policy}
@@ -429,8 +420,7 @@ The optimization approach took two stages. Firstly, we initialized the populatio
   \begin{equation*}
  	0 \leq a_2\leq 250
  \end{equation*}
- 
- \noindent where $p_c$ is the carbon price, $y_t$ is the year, $m$ is the gradient or first attribute and $c$ is the intercept or second attribute. $a_1$ was bound by $-14$ and $14$, and $a_2$ by 0 and 250. These bounds were chosen to ensure that the carbon price did not exceed ${\sim}$\textsterling500 in the year 18 (2035) and was greater than ${\sim}$-\textsterling250, as well as ensuring that the carbon tax in the first year was greater than \textsterling0 but smaller than \textsterling250.
+ \noindent where $p_c$ is the carbon price, $y_t$ is the year, $a_1$ is the gradient or first attribute and $a_2$ is the intercept or second attribute. $a_1$ was bound by $-14$ and $14$, and $a_2$ by 0 and 250. These bounds were chosen to ensure that the carbon price did not exceed ${\sim}$\textsterling500 in the year 18 (2035) and was greater than ${\sim}$-\textsterling250, as well as ensuring that the carbon tax in the first year was greater than \textsterling0 but smaller than \textsterling250.
 
 \section{results}
 \label{sec:results}
@@ -440,9 +430,9 @@ In this section we explore the results of the optimisations, the optimum carbon 
 \subsection{Non-parametric carbon policy}
 \label{sssec:result_non_parametric_strategy}
 
-Figure \ref{fig:free_points_ga_development} shows the development of the genetic algorithm against the rewards, relative carbon density and average electricity price. Darker colours display higher generation numbers. The first generation shows a wide spread in relative carbon density and average electricity price. However, over successive generations the solutions converge to a relative carbon density of 0 and an average electricity price under ${\sim}$\textsterling10MW/h. 
+Figure \ref{fig:free_points_ga_development} displays the development of the genetic algorithm against the rewards, relative carbon density and average electricity price. Darker colours display higher generation numbers. The first generation shows a wide spread in relative carbon density and average electricity price. However, over successive generations the solutions converge to a relative carbon density of 0 and an average electricity price under ${\sim}$\textsterling10MW/h. 
 
-Strikingly, the rewards of relative carbon density and average electricity price are not mutually destructive. This could be due to the low short-run marginal cost of renewable energy which reduces both electricity prices and carbon emissions.
+Strikingly, the rewards of relative carbon density and average electricity price are not mutually destructive. This could be due to the low short-run marginal cost of renewable energy which reduces both electricity prices and carbon emissions~\cite{OMahoney2011}.
 
 
 
@@ -492,7 +482,7 @@ Figure \ref{fig:heatmap_of_free_points} displays a general trend, where carbon t
 \subsection{Linear carbon policy}
 \label{sssec:result_linear_carbon_strategy}
 
-Figure \ref{fig:linear_ga_development} displays the development of the genetic algorothm against the rewards: relative carbon density and average electricity price. Similarly to the non-parametric carbon policy shown in Figure \ref{fig:free_points_ga_development}, the first generation shows a wide spread of results. However, the spread is smaller than that of the linear carbon policy. This may be due to the fact that it is easier for the GenCos to predict the carbon policy, which increases confidence in the NPV calculations. The linear carbon policy also converges to a relative carbon density of 0, and an average electricity price of ${\sim}<10$.
+Figure \ref{fig:linear_ga_development} displays the development of the genetic algorothm against the rewards: relative carbon density and average electricity price. Similarly to the non-parametric carbon policy shown in Figure \ref{fig:free_points_ga_development}, the first generation shows a wide spread of results. However, the spread is smaller than that of the linear carbon policy. This may be due to the fact that it is easier for the GenCos to predict the carbon policy, which increases confidence in the NPV calculations. The linear carbon policy also converges to a relative carbon density of 0, and an average electricity price smaller than ${\sim}$\textsterling10MW/h.
 
 Figure \ref{fig:comparison_of_distributions} compares the distributions of average electricity price for both techniques. Both methods show improvements as the number of generations of the genetic algorithm increase.  The linear policy, however, is able to more quickly converge to a low average electricity price, with a mode of ${\sim}$\textsterling5.4MW/h. The non-parametric policy has a number of poorer performing parameters, and Generation Number 4 has a bimodal distribution, with a mode of ${\sim}$\textsterling6.3MW/h.
 
@@ -523,7 +513,7 @@ Figure \ref{fig:comparison_of_distributions} compares the distributions of avera
 Figure \ref{fig:linear_actual_pdcs} displays the linear carbon policies which had an average electricity price under \textsterling4.5MW/h. There is no single `optimum' carbon policy; a range of policies are able to achieve low carbon and a low average electricity price.
 
 
-We explore the electricity mix generated of three different strategies, which are shown in Figure \ref{fig:highlighted_linear_actual_pdcs}. We selected the highest, lowest and the lowest flat carbon strategy to show a range of possible strategies.
+We explore the electricity mix generated of three different strategies shown in Figure \ref{fig:highlighted_linear_actual_strategies}. We selected the highest, lowest and the lowest flat carbon strategy to show a range of possible strategies.
 
 \begin{figure}
 \centering
@@ -534,14 +524,14 @@ We explore the electricity mix generated of three different strategies, which ar
 
 \begin{figure}
 \centering
-\includegraphics[width=0.3\textwidth]{/Users/b1017579/Documents/PhD/Papers/6-carbon-optimiser/acmart-master/samples/figures/results/highlighted_linear_actual_lines}
+\includegraphics[width=0.45\textwidth]{/Users/b1017579/Documents/PhD/Papers/6-carbon-optimiser/acmart-master/samples/figures/results/highlighted_linear_actual_lines}
 \caption{Highlighted linear carbon policies under \textsterling4.5MW/h.}
-\label{fig:highlighted_linear_actual_pdcs}
+\label{fig:highlighted_linear_actual_strategies}
 \end{figure}
 
 Figure \ref{fig:best_electricity_mixes_facet} displays the generated electricity mixes for each of the selected strategies. To generate these images we ran 80 scenarios to capture the variability between scenarios. 
 
-Whilst there does not seem to be a significant difference, with solar providing ${\sim}60\%$ of electricity mix by 2035, there is an observable difference with the other electricity generator types.
+Whilst there does not seem to be a significant difference between scenarios, with solar providing ${\sim}60\%$ of electricity mix by 2035, there is an observable difference with the other generator types.
 
 The `highest' carbon strategy exhibits a higher uptake in nuclear, possibly due to the fact that nuclear becomes more competitive when compared to coal or gas. The `lowest' carbon strategy shows a higher uptake in Combined Cycle Gas Turbines (CCGT) during the years of 2026 to 2031 as it outcompetes nuclear. The `flat' carbon policy shows a higher percentage of solar energy than any of the other scenarios, albeit with a lower percentage of nuclear. Onshore wind is shown to be consistent for these scenarios.
 
@@ -561,9 +551,9 @@ The `highest' carbon strategy exhibits a higher uptake in nuclear, possibly due 
 \section{Conclusion}
 \label{sec:conclusion}
 
-In this paper we have demonstrated that it is possible to use a genetic algorithm technique to optimise carbon tax policy using an electricity market agent-based model. 
+In this paper we have demonstrated that it is possible to use the genetic algorithm technique NSGA-II to optimise carbon tax policy using an electricity market agent-based model. 
 
-We tried a non-parametric carbon policy by allowing the genetic algorithm to optimise a carbon price for each year. These results showed us that a linear carbon tax may be appropriate. We then used a linear model as a carbon tax policy to reduce the total number of parameters for the genetic algorithm to optimise.  
+We trialled a non-parametric carbon policy by allowing the genetic algorithm to optimise a carbon price for each year. These results showed us that a linear carbon tax may be appropriate. We then used a linear model as a carbon tax policy to reduce the total number of parameters for the genetic algorithm to optimise.  
 
 We were able to show that a range of linear carbon taxes were able to achieve both low average electricity price and a relative carbon intensity of 0 in 2035. By exploring three different carbon tax policies we saw that ${\sim}$60\% of electricity consumption in the UK would be provided by solar. The difference between these `optimal' carbon tax policies was largely shown by competition between CCGT, coal and nuclear.
 
@@ -592,4 +582,3 @@ In future work we would like to try additional scenarios with varying future gen
 \endinput
 %%
 %% End of file `sample-sigconf.tex'.
-ar
