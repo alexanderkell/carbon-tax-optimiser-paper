@@ -528,7 +528,7 @@ Figure \ref{fig:best_electricity_mixes_facet} displays the generated electricity
 
 Whilst there does not seem to be a significant difference, with solar providing ${\sim}60\%$ of electricity mix by 2035, there is an observable difference with the other electricity generator types.
 
-The `highest' carbon strategy exhibits a higher uptake in nuclear, possibly due to the fact that nuclear becomes more competitive when compared to coal or gas. The `lowest' carbon strategy shows a higher uptake in Combined Cycle Gas Turbines (CCGT) during the years of 2026 to 2031 as it outcompetes nuclear. The `flat' carbon policy shows a higher percentage of solar energy than any of the other scenarios, albeit with lower nuclear.
+The `highest' carbon strategy exhibits a higher uptake in nuclear, possibly due to the fact that nuclear becomes more competitive when compared to coal or gas. The `lowest' carbon strategy shows a higher uptake in Combined Cycle Gas Turbines (CCGT) during the years of 2026 to 2031 as it outcompetes nuclear. The `flat' carbon policy shows a higher percentage of solar energy than any of the other scenarios, albeit with a lower percentage of nuclear. Onshore wind is shown to be consistent for these scenarios.
 
 \begin{figure*}
 \centering
@@ -545,8 +545,14 @@ The `highest' carbon strategy exhibits a higher uptake in nuclear, possibly due 
 
 \section{Conclusion}
 \label{sec:conclusion}
-Placeholder
 
+In this paper we have demonstrated that it is possible to use a genetic algorithm technique to optimise carbon tax policy using an electricity market agent-based model. 
+
+We tried a non-parametric carbon policy by allowing the genetic algorithm to optimise a carbon price for each year. These results showed us that a linear carbon tax may be appropriate. We then used a linear model as a carbon tax policy to reduce the total number of parameters for the genetic algorithm to optimise.  
+
+We were able to show that a range of linear carbon taxes were able to achieve both low average electricity price and a relative carbon intensity of 0 in 2035. By exploring three different carbon tax policies we saw that ${\sim}$60\% of electricity consumption in the UK would be provided by solar. The difference between these `optimal' carbon tax policies was largely shown by competition between CCGT, coal and nuclear.
+
+In future work we would like to try additional scenarios with varying future generation costs and calculate a sensitivity analysis to carbon taxes.
 %\section{Acknowledgments}
 
 
@@ -559,7 +565,6 @@ Placeholder
 %%
 %% The next two lines define the bibliography style to be used, and
 %% the bibliography file.
-\newpage
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{library,custombibtex}
 
@@ -572,3 +577,4 @@ Placeholder
 \endinput
 %%
 %% End of file `sample-sigconf.tex'.
+ar
