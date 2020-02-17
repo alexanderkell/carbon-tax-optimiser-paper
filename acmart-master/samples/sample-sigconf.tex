@@ -137,10 +137,10 @@
 %Conclusions.
 
 
-Averting the effects of anthropogenic climate change requires a transition from fossil-fuels to low-carbon technology. A  method of achieving this is to decarbonise the electricity grid to provide energy to other sources such as automotive and heating. Carbon taxes have been show to be an efficient way to aid in this transition.
+Averting the effects of anthropogenic climate change requires a transition from fossil-fuels to low-carbon technology. A  method of achieving this is to decarbonise the electricity grid. This would reduce the emissions of electricity, but  also help to decarbonise other sources such as automotive and heating by enabling a low-carbon alternative. Carbon taxes have been show to be an efficient way to aid in this transition.
 
 
-In this paper we demonstrate how to to find optimal carbon tax policies by using a genetic algorithm approach with the electricity market model, ElecSim. To achieve this we use the NSGA-II genetic algorithm to minimise average electricity price and relative carbon intensity of the electricity mix. We demonstrate that it is possible find a range of carbon taxes to suit different preferences, whilst minimising both electricity cost and carbon intensity.
+In this paper we demonstrate how to to find optimal carbon tax policies by using a genetic algorithm approach with the electricity market model, ElecSim. To achieve this we use the NSGA-II genetic algorithm to minimise average electricity price and relative carbon intensity of the electricity mix. We demonstrate that it is possible find a range of carbon taxes to suit different preferences. We minimise electricity cost to below \textsterling10/MWh and reduce carbon intensity to 0 in all cases. The optimal carbon tax strategies generally increase from 2020 to 2035, and are above \textsterling81/tCO2 in all instances, with a mean of \textsterling240/tCO2 .
 
 
 
@@ -173,28 +173,30 @@ In this paper we demonstrate how to to find optimal carbon tax policies by using
 
 % Computer simulation - why it is required
 
-Computer simulation allows practitioners to model real-world systems using software. These simulations allow for `\textit{what-if} ' analyses which can provide an indication as to how a system may behave under certain policies, environments and assumptions. These simulations become particularly important in systems which have high costs, impacts or risks associated with them.
+Computer simulation allows practitioners to model real-world systems using software. These simulations allow for `\textit{what-if} ' analyses which can provide an indication as to how a system may behave under certain policies, environments and assumptions. These simulations become particularly important in systems which have high costs, impacts or risks associated with them. A `digital twin' is a concept which has emerged in recent years. This is defined as a simulation of a specific instance of a system.
 
 % Electricity markets
 
-Electricity markets are an example of such a system. Disruptions to electricity supply, a substantial increase in the cost of electricity or unrestrained carbon emissions have the potential to destabilise economies. It is for reasons such as these that electricity market models are used to test hypotheses, develop strategies and gain an understanding of underlying dynamics to prevent undesirable consequences \cite{Jebaraj2006}. 
+Electricity markets are an example of such a system. Disruptions to electricity supply, a substantial increase in the cost of electricity or unrestrained carbon emissions have the potential to destabilise economies\cite{Kaseke2013,Masson-Delmotte2018}. It is for reasons such as these that electricity market models are used to test hypotheses, develop strategies and gain an understanding of underlying dynamics to prevent undesirable consequences \cite{Jebaraj2006}. 
 
 In this paper we use the electricity market agent-based model ElecSim to find an optimum carbon tax policy \cite{Kell}. Specifically, we use a genetic algorithm to find a carbon tax policy to reduce both average electricity price and the relative carbon density by 2035 for the UK electricity market. 
 
-Carbon taxes have been shown to quickly lower emissions and lower the costs to the public, with no upper bounds in terms of the reduction potential \cite{Wittneben2009}. Carbon taxes are able to send clear price signals, as opposed to a cap-and-trade scheme, such as the EU Emissions Trading System, which has shown to be unstable.
+Carbon taxes have been shown to quickly lower emissions and lower the costs to the public, with a high reduction potential \cite{Wittneben2009}. Carbon taxes are able to send clear price signals, as opposed to a cap-and-trade scheme, such as the EU Emissions Trading System, which has shown to be unstable~\cite{Wittneben2009}.
 
 In this paper we use the reference scenario projected by the UK Government's Department for Business \& Industrial Strategy (BEIS) and use the model parameters calibrated by Kell \textit{et al.} \cite{DBEIS2019,Kell2020}. This reference scenario projects energy and emissions until 2035. We undertook various carbon tax policy interventions to see how we could reduce relative carbon density whilst at the same time reduce the average electricity price.
 
 
-In contrast to grid or random search, genetic algorithms have the ability to converge on an optimal solution by running less simulations \cite{Bergstra2012}. Grid search is the trialling of parameters at evenly distributed spaces and random search is where parameters are chosen at random. This is of particular importance in cases with a large number of parameters or in simulations which require a long compute time, which is the case for ElecSim.
+The parameter space we optimise over is the carbon tax price over a 17 year period from 2018 to 2035. The carbon price is used to influence the objectives of average electricity price and relative carbon intensity in 2035. Grid and random search are approaches which trial parameters at evenly distributed spaces and random spaces respectively. These approaches, however, often require an increased number of simulations due to their non-dynamic nature. Genetic Algorithms, however, use an evolutionary computing approach to find global optimal solutions faster.
 
-In order to optimise over these two potentially competing objectives, we used a Genetic Algorithm, the Non-Dominated Sorting Genetic Algorithm II (NSGA-II) \cite{Valkanas2014}. The NSGA-II algorithm can approximate a Pareto frontier ~\cite{Pareto1927, Stadler1979}. A Pareto frontier is a curve in which there is no solution which is better than another along the curve for different sets of parameters.
+%In contrast to grid or random search, genetic algorithms have the ability to converge on an optimal solution by running less simulations \cite{Bergstra2012}.  Grid search is the trialling of parameters at evenly distributed spaces and random search is where parameters are chosen at random. This is of particular importance in cases with a large number of parameters or in simulations which require a long compute time, which is the case for ElecSim.
+
+In order to optimise over average electricity price and relative carbon intensity, two potentially competing objectives, we use a Genetic Algorithm, the Non-Dominated Sorting Genetic Algorithm II (NSGA-II) \cite{Valkanas2014}. The NSGA-II algorithm can approximate a Pareto frontier ~\cite{Pareto1927, Stadler1979}. A Pareto frontier is a curve in which there is no solution which is better than another along the curve for different sets of parameters. In this context, better means that a solution is closer to the optimal for a particular combination of objectives.
 
 We find that the rewards of average electricity price and relative carbon intensity are not mutually exclusive. That is, it is possible to have both a lower average electricity price and a lower relative carbon price. This is due to the low short-run marginal cost of renewable technology, which has been shown to lower electricity prices \cite{OMahoney2011}.
 
 The main contribution of this paper is to explore carbon tax strategies using genetic algorithms for multi-objective optimisation. We optimise both average electricity price and relative carbon intensity of the electricity market over a 17 year timeframe for the UK.
 
-The rest of this paper is set out as follows. Section \ref{sec:lit_review} covers examples of optimisations using genetic algorithms and different carbon strategies. Section \ref{sec:optimization_methods} details the optimization techniques used. Section \ref{sec:sim_environment} explores the electricity market model used. We present our results in Section \ref{sec:results}, and conclude in Section \ref{sec:conclusion}.
+The rest of this paper is set out as follows. Section \ref{sec:lit_review} covers examples of optimisations using genetic algorithms and different carbon strategies. Section \ref{sec:optimization_methods} details the optimization techniques applied. Section \ref{sec:sim_environment} explores the electricity market model used. We present our results in Section \ref{sec:results}, and conclude in Section \ref{sec:conclusion}.
 
 
 
@@ -221,22 +223,26 @@ Multi-objective optimisation problems are commonplace. In this section we review
 \subsection{Examples of Optimization}
 % Optimisation literature
 
-Ascione  \textit{et al}. use the NSGA-II algorithm to generate a Pareto front to optimise operating cost for space conditioning and thermal comfort \cite{Ascione2016}. They aim to optimise the hourly set point temperatures with a day-ahead planning horizon. They generate a Pareto front which allows a user to select a solution according to their comfort needs and economic constraints. They are able to reduce operating costs by up to 56\% as well as improve thermal comfort.
 
-Gorza\l{}czany \textit{et al}. apply the NSGA-II algorithm to the credit classification problem \cite{Gorzaczany2016}. They optimise over accuracy and interpretability when making financial decisions such as credit scoring and bankruptcy prediction. They are able to significantly outperform the alternative methods in terms of interpretability while remaining competitive or superior in terms of the accuracy and speed of decision making.
 
-Ma \textit{et al}. use the multi-objective artificial immune optimization algorithm for land use allocation (MOAIM-LUA model) \cite{Ma2015}. They balance land use supply and demand based on the future dynamic demands from different land use stakeholders in the region at the macro-level in Anlu County, China. They optimise the objectives of economic benefits and ecological benefits. They found that for this application they were able to obtain better solution sets than the NSGA-II algorithm.
+Similarly to our work, Ascione  \textit{et al}. use the NSGA-II algorithm to generate a Pareto front to optimise for two objectives: operating cost for space conditioning and thermal comfort \cite{Ascione2016}. The aim of this paper is to optimise the hourly set point temperatures with a day-ahead planning horizon. A Pareto front is generated which allows a user to select a solution according to their comfort needs and economic constraints. This work showed a reduction in operating costs by up to 56\% as well as improved thermal comfort.
+
+Gorza\l{}czany \textit{et al}. also apply the NSGA-II algorithm, however, they apply it to the credit classification problem \cite{Gorzaczany2016}. The objectives optimised over were accuracy and interpretability when making financial decisions such as credit scoring and bankruptcy prediction. This technique was able to significantly outperform the alternative methods in terms of interpretability while remaining competitive or superior in terms of the accuracy and speed of decision making in comparison with the existing classification methods.
+
+%Ma \textit{et al}. use the multi-objective artificial immune optimization algorithm for land use allocation (MOAIM-LUA model) \cite{Ma2015}. They balance land use supply and demand based on the future dynamic demands from different land use stakeholders in the region at the macro-level in Anlu County, China. The objectives to optimise were economic and ecological benefits. They found that for this application they were able to obtain better solution sets than the NSGA-II algorithm.
 
 
 \subsection{Carbon Tax Strategies}
 % Carbon tax optimisation related literature
 
+In this section we explore different strategies employed in the literature to analyse the benefits and consequences of a carbon tax. However, we were unable to find a study which employed a multi-objective optimisation algorithm to minimise average electricity price and relative carbon density.
 
-Zhou \textit{et al.} construct a social welfare model based on a Stackelberg game~\cite{Zhou2019}. They analyse the differences and similarities between a flat carbon tax and an increasing block tariff carbon tax using a numerical simulation. They show that an increasing block tariff carbon tax policy can significantly reduce tax burdens for manufacturers and encourage low-carbon production. In contrast to Zhou \textit{et al}. we trial multiple different carbon tax strategies using a machine learning approach. 
+Levin \textit{et al}. use an optimisation model to analyse market and investment impacts of several incentive mechanisms to support investment in renewable energy and carbon emission reductions~\cite{Levin2019}. Carbon tax  was found to be the most cost-efficient method of reducing emissions.
 
-Li \textit{et al}. use a hierarchical carbon market scheduling model to reduce carbon emissions \cite{Li2017}. They use multi-objective optimisation to find optimal behaviours for policy makers, customers and generators to minimise the costs incurred by these actors. Our work, however, focuses on the different strategies of carbon tax as opposed to optimal actor behaviour.
+Zhou \textit{et al.} construct a social welfare model based on a Stackelberg game~\cite{Zhou2019}. The differences and similarities between a flat carbon tax and an increasing block tariff carbon tax are analysed using a numerical simulation. This work shows that an increasing block tariff carbon tax policy can significantly reduce tax burdens for manufacturers and encourage low-carbon production. In contrast to Zhou \textit{et al}. we trial multiple different carbon tax strategies using a machine learning approach. 
 
-Levin \textit{et al}. use an optimisation model to analyze market and investment impacts of several incentive mechanisms to support investment in renewable energy and carbon emission reductions~\cite{Levin2019}. They find that a carbon tax is the most cost-efficient method of reducing emissions.
+Li \textit{et al}. use a hierarchical carbon market scheduling model to reduce carbon emissions \cite{Li2017}. Multi-objective optimisation was applied to discover optimal behaviours for policy makers, customers and generators to minimise the costs incurred by these actors. Our work, however, focuses on the different strategies of carbon tax as opposed to optimal actor behaviour.
+
 
 
 \section{Optimization methods}
@@ -252,7 +258,7 @@ In the following sub-sections we detail the standard genetic algorithm followed 
 
 Genetic Algorithms (GAs) ~\cite{Holland1975} are a class of evolutionary algorithm which can be used for optimisation. In this sub-section we detail the generic version of a genetic algorithm.
 
-Initially, a population of structures $P_{0}$ is generated. $P_{0}$ is then evaluated for fitness. Where fitness in this case is the reward that is to be optimised. Next, a subset of individuals from $P_{0}$ are chosen for mating, $C_{t+1} \subset P_{t}$. This subset of individuals are selected proportional to their fitness. For mating with the subset $C_{t+1}$, the `fitter' individuals have a higher chance of reproducing to create the offspring group $C'_{t+1}$. The individuals of $C'_{t+1}$ have characteristics dependent on the genetic operators, crossover and mutation. These genetic operators are an implementation decision \cite{FogelDavidB2009}. The new population $P_{t+1}$ is then created by merging individuals from $C'_{t+1}$ and $P_{t}$. See Algorithm \ref{genetic-algorithm} for detailed pseudocode.
+As shown by Algorithm \ref{genetic-algorithm}, initially, a population of structures $P_{0}$ is generated. $P_{0}$ is then evaluated for fitness. Where fitness in this case is the reward that is to be optimised. Next, a subset of individuals from $P_{0}$ are chosen for mating, $C_{t+1} \subset P_{t}$. This subset of individuals are selected proportional to their fitness. For mating with the subset $C_{t+1}$, the `fitter' individuals have a higher chance of reproducing to create the offspring group $C'_{t+1}$. The individuals of $C'_{t+1}$ have characteristics dependent on the genetic operators, crossover and mutation \cite{mitchell1998introduction}. These genetic operators are an implementation decision \cite{FogelDavidB2009}. The new population $P_{t+1}$ is then created by merging individuals from $C'_{t+1}$ and $P_{t}$. See Algorithm \ref{genetic-algorithm} for detailed pseudocode.
 %
 \begin{algorithm}[t]
 \begin{algorithmic}[1]
@@ -364,7 +370,7 @@ the new population $Q_{t+1}$
 
 Next, a new combined population is formed $R_{t}=P_{t} \cup C'_{t}$. $R_t$ has a size of $2N$. $R_t$ is then sorted according to non-domination. A new population is then formed $P_{t+1}$. Solutions are added from the sorted $R_t$ in order of non-domination. Solutions are added until the size of $P_{t+1}$ exceeds $N$. The solutions from the last layer are prioritised based on having the largest crowding distance~\cite{Valkanas2014}.
 
-This process is shown in Figure \ref{fig:pareto-layering}b, which is repeated until the termination condition is met. A termination condition could be:  no significant improvement over $X$ iterations or a specified number of iterations have been performed. 
+This process is shown in Figure \ref{fig:pareto-layering}b, which is repeated until the termination condition is met. A termination condition could be:  no significant improvement over $X$ iterations or a specified number of iterations have been performed. The full procedure is detailed formally by Algorithm \ref{algo:nsga2}.
 
 
 
@@ -373,9 +379,11 @@ This process is shown in Figure \ref{fig:pareto-layering}b, which is repeated un
 
 
 \subsection{Simulation Environment}
-In order to evaluate the different carbon strategies we used the model developed by Kell \textit{et al}., ElecSim \cite{Kell,Kell2020}. ElecSim is an agent-based model which mimics the behaviour of decentralised electricity markets. For this paper, we have parametrised the model to data for the UK in 2018. This includes the power plants in operation in 2018, and the funds available to their respective companies \cite{dukes_511, companies_house}.
+In order to evaluate the different carbon strategies we used the model developed by Kell \textit{et al}., ElecSim \cite{Kell,Kell2020}. ElecSim is an agent-based model which mimics the behaviour of decentralised electricity markets. For this paper, we have parametrised the model to data for the UK in 2018 to act as a digital twin of the UK electricity market. This includes the power plants in operation in 2018, and the funds available to their respective companies \cite{dukes_511, companies_house}.
 
-Six fundamental sections make up ElecSim: 1) power plant data; 2) scenario data; 3) the time-steps of the algorithm; 4) the power exchange; 5) the investment algorithm and 6) the generation companies (GenCos) as agents. ElecSim uses a subset of representative days of electricity demand, solar irradiance and wind speed to approximate a full year. In this context, representative days are a subset of days which when scaled up can adequately represent a year. Figure \ref{fig:model_details} details how these components interact.
+Six fundamental sections make up ElecSim: 1) power plant data; 2) scenario data; 3) the time-steps of the algorithm; 4) the power exchange; 5) the investment algorithm and 6) the generation companies (GenCos) as agents. ElecSim uses a subset of representative days of electricity demand, solar irradiance and wind speed to approximate a full year. In this context, representative days are a subset of days which when scaled up can adequately represent a year. Figure \ref{fig:model_details} details how these components interact. 
+
+Specifically, the configuration file details the scenario which can be set by the user. This includes electricity demand, carbon price and fuel prices. The data sources parametrise the digital twin to a particular country, including information such as wind capacity and power plants in operation. Generation Companies own and invest in power plants. These power plants are then matched to electricity demand using a sport market.
 
 \begin{figure}
 \centering
@@ -395,18 +403,18 @@ The yearly income for each power plant is estimated for each generation company 
 \label{ssec:optimization}
 \subsubsection{Non-parametric carbon policy}
 \label{sssec:non_parametric_strategy}
-The optimization approach has two stages. First, we initialized the population of the NSGA-II algorithm $P_0$ with 18 attributes. These corresponded to a separate carbon tax for each year, shown by Equation \ref{eq:eighteen_degrees_freedom}:
+The optimization approach has two stages. First, we initialize the population of the NSGA-II algorithm $P_0$ with 18 attributes. These correspond to a separate carbon tax for each year, shown by Equation \ref{eq:eighteen_degrees_freedom}:
 \begin{equation}
 \label{eq:eighteen_degrees_freedom}
 	P_0=\{a_1,a_2,\ldots,a_{18}\}, 0\leq a_y\leq 250,
 \end{equation} 
 
-\noindent where $P_0$ is the first population, $a_y$ is the attribute or carbon price in year $y$ and $a_1$ is the carbon price in year 1, $a_2$ the carbon price in year 2 and so forth. Each of the carbon prices were bounded between the values of \textsterling$0$ and  \textsterling$250$. This provides the optimization algorithm with the highest degree of freedom. This high degree of freedom enabled a high number of strategies to be trialled due its non-parametric nature. This, however, came with a large search space requiring a large number of iterations.
+\noindent where $P_0$ is the first population, $a_y$ is the attribute or carbon price in year $y$ and $a_1$ is the carbon price in year 1, $a_2$ the carbon price in year 2 and so forth. Each of the carbon prices are bound between the values of \textsterling$0$ and \textsterling$250$. This provides the optimization algorithm with the highest degree of freedom. This high degree of freedom enables a high number of strategies to be trialled due its non-parametric nature. This, however, comes with a large search space requiring a large number of iterations.
 
 
  \subsubsection{Linear carbon policy}
  \label{sssec:linear_carbon_strategy}
- To reduce the search space for the carbon strategy, we trialled a linear carbon strategy, of the form:
+ To reduce the search space for the carbon strategy, we trial a linear carbon strategy, of the form:
  \begin{equation}
  	p_c=a_1y_t+a_2, -14 \leq a_1\leq 14, 0 \leq a_2\leq 250,
  \end{equation}
@@ -416,7 +424,7 @@ The optimization approach has two stages. First, we initialized the population o
 %  \begin{equation*}
 % 	0 \leq a_2\leq 250
 % \end{equation*}
- \noindent where $p_c$ is the carbon price, $y_t$ is the year, $a_1$ is the gradient or first attribute and $a_2$ is the intercept or second attribute. $a_1$ was bound by $-14$ and $14$, and $a_2$ by 0 and 250. These bounds were chosen to ensure that the carbon price did not exceed ${\sim}$\textsterling500 in the year 18 (2035) and was greater than about -\textsterling250, as well as ensuring that the carbon tax in the first year was greater than \textsterling0 but smaller than \textsterling250.
+ \noindent where $p_c$ is the carbon price, $y_t$ is the year, $a_1$ is the gradient or first attribute and $a_2$ is the intercept or second attribute. $a_1$ is bound by $-14$ and $14$, and $a_2$ by 0 and 250. These bounds are chosen to ensure that the carbon price does not exceed ${\sim}$\textsterling500 in the year 18 (2035) and is greater than about -\textsterling250, as well as ensuring that the carbon tax in the first year is greater than \textsterling0 but smaller than \textsterling250.
 
 \section{results}
 \label{sec:results}
@@ -442,21 +450,34 @@ Figure \ref{fig:heatmap_of_free_points} displays a general trend, where carbon t
 
 
 
+%\begin{figure}
+%\begin{subfigure}[h]{0.49\linewidth}
+%\includegraphics[width=\linewidth]{/Users/b1017579/Documents/PhD/Papers/6-carbon-optimiser/acmart-master/samples/figures/results/free_points_ga_development}
+%\caption{Development of genetic algorithm rewards.}
+%\label{fig:free_points_ga_development}
+%\end{subfigure}%
+%\hfill
+%\begin{subfigure}[h]{0.5\linewidth}
+%\includegraphics[width=\linewidth]{/Users/b1017579/Documents/PhD/Papers/6-carbon-optimiser/acmart-master/samples/figures/results/best_heatmap_no_marginals}
+%\caption{Density plot of points with an average electricity price <\textsterling5/MWh.}
+%\label{fig:heatmap_of_free_points}
+%\end{subfigure}
+%\caption{Non-parametric carbon tax policy results in 2035.}
+%\end{figure}
+
 \begin{figure}
-\begin{subfigure}[h]{0.49\linewidth}
-\includegraphics[width=\linewidth]{/Users/b1017579/Documents/PhD/Papers/6-carbon-optimiser/acmart-master/samples/figures/results/free_points_ga_development}
-\caption{Development of genetic algorithm rewards.}
+\centering
+\includegraphics[width=0.75\linewidth]{/Users/b1017579/Documents/PhD/Papers/6-carbon-optimiser/acmart-master/samples/figures/results/free_points_ga_development}
+\caption{Development of genetic algorithm rewards for non-parametric carbon tax policy results in 2035..}
 \label{fig:free_points_ga_development}
-\end{subfigure}%
-\hfill
-\begin{subfigure}[h]{0.5\linewidth}
-\includegraphics[width=\linewidth]{/Users/b1017579/Documents/PhD/Papers/6-carbon-optimiser/acmart-master/samples/figures/results/best_heatmap_no_marginals}
-\caption{Density plot of points with an average electricity price <\textsterling5/MWh.}
-\label{fig:heatmap_of_free_points}
-\end{subfigure}
-\caption{Non-parametric carbon tax policy results in 2035.}
 \end{figure}
 
+\begin{figure}
+\centering
+\includegraphics[width=0.75\linewidth]{/Users/b1017579/Documents/PhD/Papers/6-carbon-optimiser/acmart-master/samples/figures/results/best_heatmap_no_marginals}
+\caption{Density plot of points with an average electricity price <\textsterling5/MWh for non-parametric carbon tax policy results in 2035.}
+\label{fig:heatmap_of_free_points}
+\end{figure}
 
 
 
@@ -560,6 +581,8 @@ In this paper we have demonstrated that it is possible to use the genetic algori
 We trialled a non-parametric carbon policy by allowing the genetic algorithm to optimise a carbon price for each year. These results showed us that a linear carbon tax may be appropriate. We then used a linear model as a carbon tax policy to reduce the total number of parameters for the genetic algorithm to optimise.  
 
 We were able to show that a range of linear carbon taxes were able to achieve both low average electricity price and a relative carbon intensity of 0 in 2035. By exploring three different carbon tax policies we saw that ${\sim}$60\% of electricity consumption in the UK would be provided by solar. The difference between these `optimal' carbon tax policies was largely shown by competition between CCGT, coal and nuclear.
+
+This was largely due to the low short-run marginal cost of solar and nuclear energy which means that they are often dispatched ahead of the fossil-fuel based generators. CCGT and coal, however, are useful for filling demand when there is low solar irradiance.
 
 In future work we would like to try additional scenarios with varying future generation costs and calculate a sensitivity analysis to carbon taxes.
 %\section{Acknowledgments}
