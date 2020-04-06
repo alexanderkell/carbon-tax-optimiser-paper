@@ -144,9 +144,9 @@
 %Results
 %Conclusions.
 
-Averting the effects of anthropogenic climate change requires a transition from fossil-fuels to low-carbon technology. A way to achieve this is to decarbonise the electricity grid. This would reduce carbon emissions due to electricity generation, and also help to decarbonise other sources such as automotive and heating by enabling a low-carbon alternative. Carbon taxes have been show to be an efficient way to aid in this transition.
+Averting the effects of anthropogenic climate change requires a transition from fossil-fuels to low-carbon technology. A way to achieve this is to decarbonise the electricity grid. This would reduce carbon emissions due to electricity generation, and also help to decarbonise other sources such as automotive and heating by enabling a low-carbon alternative. Carbon taxes have been shown to be an efficient way to aid in this transition.
 
-In this paper we demonstrate how to to find optimal carbon tax policies by using a genetic algorithm approach to model the electricity market agent-based model ElecSim. To achieve this we use the NSGA-II genetic algorithm to minimise average electricity price and relative carbon intensity of the electricity mix. We demonstrate that it is possible find a range of carbon taxes to suit different objectives. We minimise electricity cost to below \textsterling10/MWh and reduce carbon intensity to 0 in all cases. The optimal carbon tax strategies generally increase from 2020 to 2035, and are above \textsterling81/tCO2 in all instances, with a mean of \textsterling240/tCO2.
+In this paper we demonstrate how to to find optimal carbon tax policies by using a genetic algorithm approach, using the electricity market agent-based model ElecSim. To achieve this we use the NSGA-II genetic algorithm to minimise average electricity price and relative carbon intensity of the electricity mix. We demonstrate that it is possible to find a range of carbon taxes to suit different objectives. We minimise electricity cost to below \textsterling10/MWh and reduce carbon intensity to 0 in all cases. The optimal carbon tax strategies generally increase from 2020 to 2035, and are above \textsterling81/tCO2 in all instances, with a mean of \textsterling240/tCO2.
 
 
 \end{abstract}
@@ -181,7 +181,7 @@ Computer simulation allows practitioners to model real-world systems using softw
 
 % Electricity markets
 
-Electricity markets are an example of such a system. Disruptions to electricity supply, a substantial increase in the cost of electricity or unrestrained carbon emissions have the potential to destabilise economies\cite{Kaseke2013,Masson-Delmotte2018}. It is for reasons such as these that electricity market models are used to test hypotheses, develop strategies and gain an understanding of underlying dynamics to prevent undesirable consequences \cite{Jebaraj2006}. 
+Electricity markets are an example of such a system. Disruptions to electricity supply, a substantial increase in the cost of electricity or unrestrained carbon emissions have the potential to destabilise economies~\cite{Kaseke2013,Masson-Delmotte2018}. It is for reasons such as these that electricity market models are used to test hypotheses, develop strategies and gain an understanding of underlying dynamics to prevent undesirable consequences \cite{Jebaraj2006}. 
 
 In this paper we use the electricity market agent-based model ElecSim to find an optimum carbon tax policy \cite{Kell}. Specifically, we use a genetic algorithm to find a carbon tax policy to reduce both average electricity price and the relative carbon density by 2035 for the UK electricity market. 
 
@@ -190,7 +190,7 @@ Carbon taxes have been shown to quickly lower emissions and lower the costs to t
 In this paper we use the reference scenario projected by the UK Government's Department for Business \& Industrial Strategy (BEIS) with model parameters calibrated by Kell \textit{et al.} \cite{DBEIS2019,Kell2020}. This reference scenario projects energy and emissions until 2035. We undertook various carbon tax policy interventions to see how we could reduce relative carbon density whilst at the same time reduce the average electricity price.
 
 
-The parameter space we optimise over is the carbon tax price over a 17 year period from 2018 to 2035. The carbon price is used to influence the objectives of average electricity price and relative carbon intensity in 2035. Grid and random search are approaches which trial parameters at evenly distributed spaces and random spaces respectively. These approaches, however, are often inefficient, however, require an increased number of simulations due to their non-dynamic nature. Genetic Algorithms in contrast use an evolutionary computing approach to find global optimal solutions faster.
+The parameter space we optimise over is the carbon tax price over a 17 year period from 2018 to 2035. The carbon price is used to influence the objectives of average electricity price and relative carbon intensity in 2035. Grid and random search are approaches which trial parameters at evenly distributed spaces and random spaces respectively. These approaches are often inefficient, however, and require an increased number of simulations due to their static nature. Genetic Algorithms in contrast use an evolutionary computing approach to find global optimal solutions faster.
 
 %In contrast to grid or random search, genetic algorithms have the ability to converge on an optimal solution by running less simulations \cite{Bergstra2012}.  Grid search is the trialling of parameters at evenly distributed spaces and random search is where parameters are chosen at random. This is of particular importance in cases with a large number of parameters or in simulations which require a long compute time, which is the case for ElecSim.
 
@@ -237,7 +237,7 @@ Gorza\l{}czany \textit{et al}. also apply the NSGA-II algorithm, however, they a
 \subsection{Carbon Tax Strategies}
 % Carbon tax optimisation related literature
 
-In this section we explore different strategies employed in the literature to analyse the benefits and consequences of a carbon tax. However, we were unable to find a study which employed a multi-objective optimisation algorithm to minimise average electricity price and relative carbon density.
+In this section we explore different strategies employed in the literature to analyse the benefits and consequences of a carbon tax. We were unable, however, to find a study which employed a multi-objective optimisation algorithm to minimise average electricity price and relative carbon density.
 
 Levin \textit{et al}. use an optimisation model to analyse market and investment impacts of several incentive mechanisms to support investment in renewable energy and carbon emission reductions~\cite{Levin2019}. Carbon tax  was found to be the most cost-efficient method of reducing emissions.
 
@@ -416,7 +416,7 @@ The optimization approach has two stages. First, we initialize the population of
 
  \subsubsection{Linear carbon policy}
  \label{sssec:linear_carbon_strategy}
- To reduce the search space for the carbon strategy, we trial a linear carbon strategy, of the form:
+ To reduce the search space for the carbon strategy, we also trial a linear carbon strategy, of the form:
  \begin{equation}
  	p_c=a_1y_t+a_2, -14 \leq a_1\leq 14, 0 \leq a_2\leq 250,
  \end{equation}
