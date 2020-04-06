@@ -31,6 +31,10 @@
 \usepackage{subcaption}
 
 
+\usepackage{color}
+\newcommand{\dad}{\textcolor{red}}
+\usepackage{cancel}
+
 %%
 %% \BibTeX command to typeset BibTeX logo in the docs
 \AtBeginDocument{%
@@ -48,9 +52,9 @@
 \acmDOI{10.1145/3185768.3186313}
 
 %% These commands are for a PROCEEDINGS abstract or paper.
-\acmConference[ICPE `20]{ICPE `20: ACM/SPEC International Conference on Performance Engineering}{April 20--24, 2020}{Edmonton, Canada}
-\acmBooktitle{ICPE `20: ACM/SPEC International Conference on Performance Engineering,
-  April 20--24, 2020, Edmonton, Canada}
+\acmConference[e-Energy `20]{e-Energy `20: Tenth ACM International Conference on Future Energy Systems}{June 22--26, 2020}{Melbourne, Australia}
+\acmBooktitle{Tenth ACM International Conference on Future Energy Systems,
+  June 22--26, 2020, Melbourne, Australia}
 \acmPrice{15.00}
 \acmISBN{978-1-4503-XXXX-X/18/06}
 
@@ -82,7 +86,7 @@
 %%
 %% The "title" command has an optional parameter,
 %% allowing the author to define a "short title" to be used in page headers.
-\title{Optimizing carbon tax for decentralized electricity markets using an agent-based model}
+\title[Optimizing carbon tax with optimization]{Optimizing carbon tax for decentralized electricity markets using an agent-based model}
 
 %%
 %% The "author" command and its associated commands are used to define
@@ -126,6 +130,9 @@
 \renewcommand{\shortauthors}{Anonymized}
 %\renewcommand{\shortauthors}{Kell et al.}
 
+
+
+
 %%
 %% The abstract is a short summary of the work to be presented in the
 %% article.
@@ -137,15 +144,11 @@
 %Results
 %Conclusions.
 
+Averting the effects of anthropogenic climate change requires a transition from fossil-fuels to low-carbon technology. A way to achieve this is to decarbonise the electricity grid. This would reduce carbon emissions due to electricity generation, and also help to decarbonise other sources such as automotive and heating by enabling a low-carbon alternative. Carbon taxes have been show to be an efficient way to aid in this transition.
 
-Averting the effects of anthropogenic climate change requires a transition from fossil-fuels to low-carbon technology. A  method of achieving this is to decarbonise the electricity grid. This would reduce the emissions of electricity, but  also help to decarbonise other sources such as automotive and heating by enabling a low-carbon alternative. Carbon taxes have been show to be an efficient way to aid in this transition.
-
-
-In this paper we demonstrate how to to find optimal carbon tax policies by using a genetic algorithm approach with the electricity market model, ElecSim. To achieve this we use the NSGA-II genetic algorithm to minimise average electricity price and relative carbon intensity of the electricity mix. We demonstrate that it is possible find a range of carbon taxes to suit different preferences. We minimise electricity cost to below \textsterling10/MWh and reduce carbon intensity to 0 in all cases. The optimal carbon tax strategies generally increase from 2020 to 2035, and are above \textsterling81/tCO2 in all instances, with a mean of \textsterling240/tCO2 .
+In this paper we demonstrate how to to find optimal carbon tax policies by using a genetic algorithm approach to model the electricity market agent-based model ElecSim. To achieve this we use the NSGA-II genetic algorithm to minimise average electricity price and relative carbon intensity of the electricity mix. We demonstrate that it is possible find a range of carbon taxes to suit different objectives. We minimise electricity cost to below \textsterling10/MWh and reduce carbon intensity to 0 in all cases. The optimal carbon tax strategies generally increase from 2020 to 2035, and are above \textsterling81/tCO2 in all instances, with a mean of \textsterling240/tCO2.
 
 
-
- 
 \end{abstract}
 
 %%
@@ -182,22 +185,22 @@ Electricity markets are an example of such a system. Disruptions to electricity 
 
 In this paper we use the electricity market agent-based model ElecSim to find an optimum carbon tax policy \cite{Kell}. Specifically, we use a genetic algorithm to find a carbon tax policy to reduce both average electricity price and the relative carbon density by 2035 for the UK electricity market. 
 
-Carbon taxes have been shown to quickly lower emissions and lower the costs to the public, with a high reduction potential \cite{Wittneben2009}. Carbon taxes are able to send clear price signals, as opposed to a cap-and-trade scheme, such as the EU Emissions Trading System, which has shown to be unstable~\cite{Wittneben2009}.
+Carbon taxes have been shown to quickly lower emissions and lower the costs to the public \cite{Wittneben2009}. Carbon taxes are able to send clear price signals, as opposed to a cap-and-trade scheme, such as the EU Emissions Trading System, which has shown to be unstable~\cite{Wittneben2009}.
 
-In this paper we use the reference scenario projected by the UK Government's Department for Business \& Industrial Strategy (BEIS) and use the model parameters calibrated by Kell \textit{et al.} \cite{DBEIS2019,Kell2020}. This reference scenario projects energy and emissions until 2035. We undertook various carbon tax policy interventions to see how we could reduce relative carbon density whilst at the same time reduce the average electricity price.
+In this paper we use the reference scenario projected by the UK Government's Department for Business \& Industrial Strategy (BEIS) with model parameters calibrated by Kell \textit{et al.} \cite{DBEIS2019,Kell2020}. This reference scenario projects energy and emissions until 2035. We undertook various carbon tax policy interventions to see how we could reduce relative carbon density whilst at the same time reduce the average electricity price.
 
 
-The parameter space we optimise over is the carbon tax price over a 17 year period from 2018 to 2035. The carbon price is used to influence the objectives of average electricity price and relative carbon intensity in 2035. Grid and random search are approaches which trial parameters at evenly distributed spaces and random spaces respectively. These approaches, however, often require an increased number of simulations due to their non-dynamic nature. Genetic Algorithms, however, use an evolutionary computing approach to find global optimal solutions faster.
+The parameter space we optimise over is the carbon tax price over a 17 year period from 2018 to 2035. The carbon price is used to influence the objectives of average electricity price and relative carbon intensity in 2035. Grid and random search are approaches which trial parameters at evenly distributed spaces and random spaces respectively. These approaches, however, are often inefficient, however, require an increased number of simulations due to their non-dynamic nature. Genetic Algorithms in contrast use an evolutionary computing approach to find global optimal solutions faster.
 
 %In contrast to grid or random search, genetic algorithms have the ability to converge on an optimal solution by running less simulations \cite{Bergstra2012}.  Grid search is the trialling of parameters at evenly distributed spaces and random search is where parameters are chosen at random. This is of particular importance in cases with a large number of parameters or in simulations which require a long compute time, which is the case for ElecSim.
 
-In order to optimise over average electricity price and relative carbon intensity, two potentially competing objectives, we use a Genetic Algorithm, the Non-Dominated Sorting Genetic Algorithm II (NSGA-II) \cite{Valkanas2014}. The NSGA-II algorithm can approximate a Pareto frontier ~\cite{Pareto1927, Stadler1979}. A Pareto frontier is a curve in which there is no solution which is better than another along the curve for different sets of parameters. In this context, better means that a solution is closer to the optimal for a particular combination of objectives.
+In order to optimise over two potentially competing objectives, i.e. average electricity price and relative carbon intensity, we use the Non-Dominated Sorting Genetic Algorithm II (NSGA-II) \cite{Valkanas2014}. The NSGA-II algorithm can approximate a Pareto frontier ~\cite{Pareto1927, Stadler1979}. A Pareto frontier is a curve in which there is no solution which is better than another along the curve for different sets of parameters. In this context, better means that a solution is closer to the optimal for a particular combination of objectives.
 
 We find that the rewards of average electricity price and relative carbon intensity are not mutually exclusive. That is, it is possible to have both a lower average electricity price and a lower relative carbon price. This is due to the low short-run marginal cost of renewable technology, which has been shown to lower electricity prices \cite{OMahoney2011}.
 
 The main contribution of this paper is to explore carbon tax strategies using genetic algorithms for multi-objective optimisation. We optimise both average electricity price and relative carbon intensity of the electricity market over a 17 year timeframe for the UK.
 
-The rest of this paper is set out as follows. Section \ref{sec:lit_review} covers examples of optimisations using genetic algorithms and different carbon strategies. Section \ref{sec:optimization_methods} details the optimization techniques applied. Section \ref{sec:sim_environment} explores the electricity market model used. We present our results in Section \ref{sec:results}, and conclude in Section \ref{sec:conclusion}.
+The following sections are set out as follows. Section \ref{sec:lit_review} covers examples of optimisations using genetic algorithms and different carbon strategies. Section \ref{sec:optimization_methods} details the optimization techniques applied. Section \ref{sec:sim_environment} explores the electricity market model used. We present our results in Section \ref{sec:results}, and conclude in Section \ref{sec:conclusion}.
 
 
 
@@ -223,8 +226,6 @@ Multi-objective optimisation problems are commonplace. In this section we review
 
 \subsection{Examples of Optimization}
 % Optimisation literature
-
-
 
 Similarly to our work, Ascione  \textit{et al}. use the NSGA-II algorithm to generate a Pareto front to optimise for two objectives: operating cost for space conditioning and thermal comfort \cite{Ascione2016}. The aim of this paper is to optimise the hourly set point temperatures with a day-ahead planning horizon. A Pareto front is generated which allows a user to select a solution according to their comfort needs and economic constraints. This work showed a reduction in operating costs by up to 56\% as well as improved thermal comfort.
 
@@ -568,7 +569,9 @@ The `highest' carbon strategy exhibits a higher uptake in nuclear, possibly due 
 
 
 
-%lowest_data_mix.pdf%flat_data_mix%highest_data_mix
+%lowest_data_mix.pdf
+%flat_data_mix
+%highest_data_mix
 
 
 
@@ -608,3 +611,4 @@ In future work we would like to try additional scenarios with varying future gen
 \endinput
 %%
 %% End of file `sample-sigconf.tex'.
+
