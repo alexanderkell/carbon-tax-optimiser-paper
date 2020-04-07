@@ -144,7 +144,7 @@
 %Results
 %Conclusions.
 
-Averting the effects of anthropogenic climate change requires a transition from fossil-fuels to low-carbon technology. A way to achieve this is to decarbonise the electricity grid. This would reduce carbon emissions due to electricity generation, and also help to decarbonise other sources such as automotive and heating by enabling a low-carbon alternative. Carbon taxes have been shown to be an efficient way to aid in this transition.
+Averting the effects of anthropogenic climate change requires a transition from fossil-fuels to low-carbon technology. A way to achieve this is to decarbonise the electricity grid, however, further efforts must be made in other fields such as transport and heating for full decarbonisation. This would reduce carbon emissions due to electricity generation, and also help to decarbonise other sources such as automotive and heating by enabling a low-carbon alternative. Carbon taxes have been shown to be an efficient way to aid in this transition.
 
 In this paper we demonstrate how to to find optimal carbon tax policies through a genetic algorithm approach, using the electricity market agent-based model ElecSim. To achieve this we use the NSGA-II genetic algorithm to minimise average electricity price and relative carbon intensity of the electricity mix. We demonstrate that it is possible to find a range of carbon taxes to suit different objectives. We minimise electricity cost to below \textsterling10/MWh and reduce carbon intensity to zero in all cases. The optimal carbon tax strategies generally increase from 2020 to 2035, and are above \textsterling81/tCO2 in all instances, with a mean of \textsterling240/tCO2.
 
@@ -177,7 +177,7 @@ In this paper we demonstrate how to to find optimal carbon tax policies through 
 
 % Computer simulation - why it is required
 
-Computer simulation allows practitioners to model real-world systems using software. These simulations allow for `\textit{what-if} ' analyses which can provide an indication as to how a system may behave under certain policies, environments and assumptions. These simulations become particularly important in systems which have high costs, impacts or risks associated with them. A `digital twin' is a concept which has emerged in recent years. This is defined as a simulation of a specific instance of a system.
+Computer simulation allows practitioners to model real-world systems using software. These simulations allow for `\textit{what-if} ' analyses which can provide an indication as to how a system may behave under certain policies, environments and assumptions. These simulations become particularly important in real systems which have high costs, impacts or risks associated with them. A `digital twin' is a concept which has emerged in recent years. This is defined as a simulation of a specific instance of a system. This digital twin can then be used to learn of optimisation techniques that can be applied to the real system. This foregoes the necessity of experimenting with the real system, avoiding potential negative side effects.
 
 % Electricity markets
 
@@ -341,7 +341,7 @@ This order prefers solutions with a lower rank $i_{rank}$. For solutions with th
 
 \subsubsection{Main loop}
 
-Similarly to the standard GA, a population $P_{0}$ is created with random parameters. The solutions of $P_0$ are then sorted according to non-domination. The child population $C'_{1}$ of size $N$ is then created by binary tournament selection, recombination and mutation operators. In this case, tournament selection is the process of evaluating and comparing the fitnesses of various individuals within a population. In binary tournament selection, two individuals are chosen at random, the fitnesses are evaluated and the individual with the better solution is selected~\cite{AbdRahman2016}. 
+Similarly to the standard GA, a population $P_{0}$ is created with random parameters. The solutions of $P_0$ are then sorted according to non-domination. The child population $C'_{1}$ of size $N$ is then created by binary tournament selection, recombination and mutation operators. In this case, tournament selection is the process of evaluating and comparing the fitness of various individuals within a population. In binary tournament selection, two individuals are chosen at random, the fitness are evaluated and the individual with the better solution is selected~\cite{AbdRahman2016}. 
 
 
 
