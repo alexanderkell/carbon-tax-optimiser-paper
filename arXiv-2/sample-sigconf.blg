@@ -1,0 +1,77 @@
+This is BibTeX, Version 0.99d (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: sample-sigconf.aux
+The style file: ACM-Reference-Format.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: library.bib
+Database file #2: custombibtex.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--no number and no volume in FogelDavidB2009
+Warning--page numbers missing in both pages and numpages fields in FogelDavidB2009
+Warning--empty publisher in Burke2014
+Warning--empty address in Burke2014
+Warning--no number and no volume in companies_house
+Warning--page numbers missing in both pages and numpages fields in companies_house
+Warning--unusual to have number, but no volume, for DBEIS2019
+Warning--page numbers missing in both pages and numpages fields in DBEIS2019
+Warning--no number and no volume in dukes_511
+Warning--page numbers missing in both pages and numpages fields in dukes_511
+Warning--empty publisher in Holland1975
+Warning--empty address in Holland1975
+Warning--no journal in Kaseke2013
+Warning--no number and no volume in Kell
+Warning--no number and no volume in Kell2020
+Warning--page numbers missing in both pages and numpages fields in Kell2020
+Warning--empty address in Masson-Delmotte2018
+Warning--empty address in mitchell1998introduction
+Warning--unusual to have number, but no volume, for OMahoney2011
+Warning--no journal in Zitzler2006
+Warning--no number and no volume in Zitzler2006
+You've used 26 entries,
+            5901 wiz_defined-function locations,
+            1539 strings with 20788 characters,
+and the built_in function-call counts, 31052 in all, are:
+= -- 4440
+> -- 1177
+< -- 1
++ -- 388
+- -- 420
+* -- 2274
+:= -- 3173
+add.period$ -- 134
+call.type$ -- 26
+change.case$ -- 186
+chr.to.int$ -- 26
+cite$ -- 47
+duplicate$ -- 2462
+empty$ -- 1751
+format.name$ -- 500
+if$ -- 7646
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 94
+newline$ -- 317
+num.names$ -- 208
+pop$ -- 827
+preamble$ -- 1
+purify$ -- 419
+quote$ -- 0
+skip$ -- 814
+stack$ -- 0
+substring$ -- 2274
+swap$ -- 252
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 411
+warning$ -- 21
+while$ -- 214
+width$ -- 0
+write$ -- 545
+(There were 21 warnings)
